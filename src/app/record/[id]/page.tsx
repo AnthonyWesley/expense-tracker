@@ -17,8 +17,6 @@ import ModalForm from "../../../components/Modal";
 export default function Record({ params }: { params: { id: string } }) {
   const { list, handleDeleteItem, handleEditItem, refs } = useAppContext();
   const router = useRouter();
-  // const listId: ItemType = list.find((item) => item.id == params.id);
-
   const listId = findItemByParams(list, params.id);
   if (listId === undefined) {
     return [];
@@ -63,7 +61,7 @@ export default function Record({ params }: { params: { id: string } }) {
               status={
                 categories[listId.category]?.expense ? "expense" : "income"
               }
-              modalName={"Editar"}
+              modalName={<Button>EDITAR</Button>}
               headerTitle="EDITAR REGISTRO"
               funcActions={{
                 funcTwo: () =>
@@ -84,10 +82,10 @@ export default function Record({ params }: { params: { id: string } }) {
             />
             <Separator orientation="vertical" />
             <Button
-              className="bg-red-500"
+              className="bg-red-500 hover:bg-red-600"
               onClick={() => handleDeleteItem(params.id)}
             >
-              DETETAR
+              DELETAR
             </Button>
           </div>
         </div>
