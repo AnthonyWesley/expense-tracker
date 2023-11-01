@@ -29,10 +29,12 @@ export default function useAddData() {
   };
 
   const handleDeleteItem = (id: string) => {
-    router.push("/");
-    const newList = list.filter((item) => item?.id !== id);
-    setList(newList);
-    setLocalStorage(newList);
+    if (confirm("Deseja deletar seu registro?")) {
+      router.push("/");
+      const newList = list.filter((item) => item?.id !== id);
+      setList(newList);
+      setLocalStorage(newList);
+    }
   };
 
   const handleEditItem = (id: string, updatedItem: ItemType) => {
@@ -86,6 +88,33 @@ export default function useAddData() {
     refs.valueRef.current = null;
     refs.categoryRef.current = null;
     refs.dateRef.current = null;
+  };
+
+  const handleInfosValidation = (refList: RefsType) => {
+    let errors: string[] = [];
+    const titleValue = (refList.titleRef.current as HTMLInputElement).value;
+    const valueValue = (refList.valueRef.current as HTMLInputElement).value;
+    const categoryValue = refList.categoryRef.current as HTMLInputElement;
+    const dateValue = (refList.dateRef.current as HTMLInputElement).value;
+
+    if (isNaN(new Date(dateValue).getTime())) {
+      errors.push("Data inválida!");
+    }
+    if (!categoryKeys.includes(handleRefValues(categoryValue) as string)) {
+      errors.push("Categoria inválida!");
+    }
+    if (titleValue === "") {
+      errors.push("Título vazio!");
+    }
+    if (parseInt(valueValue) <= 0 || !parseInt(valueValue)) {
+      errors.push("Valor inválido!");
+    }
+    if (errors.length > 0) {
+      alert(errors.join("\n"));
+    } else {
+      clearFields();
+      return true;
+    }
   };
 
   useEffect(() => {

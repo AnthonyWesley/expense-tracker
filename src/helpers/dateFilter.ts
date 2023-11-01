@@ -20,6 +20,10 @@ export const filterListByMonth = (
     }
   }
 
+  newList.sort((a, b) => {
+    return a.date.getTime() - b.date.getTime();
+  });
+
   return newList;
 };
 

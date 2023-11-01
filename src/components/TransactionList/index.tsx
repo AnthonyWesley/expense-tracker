@@ -21,10 +21,10 @@ export function TransactionList() {
   const router = useRouter();
 
   return (
-    <Table className="bg-white">
+    <Table className="bg-white rounded-lg">
       <TableCaption>Lista de movimentações.</TableCaption>
       <TableHeader>
-        <TableRow>
+        <TableRow className="bg-gray-200">
           <TableHead className="w-[100px]">TIPO</TableHead>
           <TableHead className="w-[100px]">CATEGORIA</TableHead>
           <TableHead className="flex-1">DESCRIÇÃO</TableHead>
@@ -37,6 +37,7 @@ export function TransactionList() {
           <TableRow
             key={index}
             onClick={() => router.push(`/record/${invoice.id}`)}
+            className="cursor-pointer"
           >
             <TableCell className="font-medium">
               {(categories[invoice.category]?.expense && (

@@ -10,9 +10,15 @@ import {
   handleRefValues,
   newDateAdjusted,
 } from "@/helpers/dateFilter";
-import { ArrowDownFromLine, ArrowUpFromLine, MoveLeft } from "lucide-react";
+import {
+  ArrowDownFromLine,
+  ArrowUpFromLine,
+  FileSignature,
+  MoveLeft,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import ModalForm from "../../../components/Modal";
+import GenericButton from "@/components/GenericButton";
 
 export default function Record({ params }: { params: { id: string } }) {
   const { list, handleDeleteItem, handleEditItem, refs } = useAppContext();
@@ -52,16 +58,22 @@ export default function Record({ params }: { params: { id: string } }) {
 
           <Separator className="my-4 text-right" />
           <div className="flex h-5 items-center justify-end space-x-2 text-sm my-2">
-            <Button onClick={() => router.push("/")}>
-              <MoveLeft />
-            </Button>
+            <div onClick={() => router.push("/")}>
+              <GenericButton tailwind="bg-blue-950">
+                <MoveLeft size={21} />
+              </GenericButton>
+            </div>
             <Separator orientation="vertical" />
 
             <ModalForm
               status={
                 categories[listId.category]?.expense ? "expense" : "income"
               }
-              modalName={<Button>EDITAR</Button>}
+              modalName={
+                <div>
+                  <GenericButton tailwind="bg-blue-950">EDITAR</GenericButton>
+                </div>
+              }
               headerTitle="EDITAR REGISTRO"
               funcActions={{
                 funcTwo: () =>
@@ -81,12 +93,9 @@ export default function Record({ params }: { params: { id: string } }) {
               }}
             />
             <Separator orientation="vertical" />
-            <Button
-              className="bg-red-500 hover:bg-red-600"
-              onClick={() => handleDeleteItem(params.id)}
-            >
-              DELETAR
-            </Button>
+            <div onClick={() => handleDeleteItem(params.id)}>
+              <GenericButton tailwind="bg-red-500">DELETAR</GenericButton>
+            </div>
           </div>
         </div>
       </div>

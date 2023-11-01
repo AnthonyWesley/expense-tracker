@@ -20,6 +20,7 @@ import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
 import { CategoriesType } from "@/type/CategoriesType";
 import { Textarea } from "../ui/textarea";
+import GenericButton from "../GenericButton";
 
 type ModalProp = {
   modalName?: string | JSX.Element;
@@ -95,7 +96,7 @@ const ModalTest = ({
           <div onClick={handleOpen}>{modalName}</div>
         </DialogTrigger>
         <DialogContent>
-          <DialogHeader className="bg-blue-950 text-white font-semibold py-4 my-4 px-4 rounded transition duration-300 ease-in-out">
+          <DialogHeader>
             <DialogTitle>{headerTitle}</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col m-4 gap-3">
@@ -155,11 +156,8 @@ const ModalTest = ({
           </div>
           <div className="flex justify-end">
             <DialogTrigger>
-              <div
-                onClick={handleSubmit}
-                className="cursor-pointer bg-blue-950 hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out"
-              >
-                REGISTRAR
+              <div onClick={handleSubmit}>
+                <GenericButton tailwind="bg-blue-950">REGISTRAR</GenericButton>
               </div>
             </DialogTrigger>
           </div>

@@ -33,7 +33,6 @@ export default function useApplication(list: ItemType[]) {
     let newIncome = 0;
     let newExpense = 0;
     const [year, month] = currentMonth.split("-");
-    // const actualMonth = new Date().getMonth() + 1;
 
     for (const i in filteredList) {
       if (
