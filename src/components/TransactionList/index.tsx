@@ -69,7 +69,7 @@ export function TransactionList() {
       </Table>
 
       <Link href={`/record`} className="text-white text-center">
-        Lista de movimentações.
+        Movimentações.
       </Link>
     </>
   );

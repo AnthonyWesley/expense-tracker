@@ -97,5 +97,17 @@ export default function useAddData() {
     }
   }, []);
 
+  // function updateLocalStorage() {
+  //   const storedData = JSON.parse(localStorage.getItem(".") || "[]");
+  //   const updatedItems = storedData.map((item) => {
+  //     if (item.category === "personalCare") {
+  //       item.category = "care";
+  //     }
+  //     return item;
+  //   });
+  //   localStorage.setItem(".", JSON.stringify(updatedItems));
+  //   return updatedItems;
+  // }
+
   return { refs, handleAddEvent, handleDeleteItem, handleEditItem, list };
 }

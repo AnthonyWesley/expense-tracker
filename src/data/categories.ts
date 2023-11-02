@@ -5,7 +5,7 @@ export const categories: CategoriesType = {
   supermarket: { title: "MERCADO", color: "brown", expense: true },
   drugstore: { title: "FARMÁCIA", color: "crimson", expense: true },
   goods: { title: "BENS", color: "sienna", expense: true },
-  personalCare: {
+  care: {
     title: "CUIDADO PESSOAL",
     color: "MediumSlateBlue",
     expense: true,
