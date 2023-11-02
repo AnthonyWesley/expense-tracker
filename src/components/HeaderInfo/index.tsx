@@ -8,7 +8,6 @@ export default function HeaderInfo() {
 
   return (
     <header className="flex justify-between items-center p-2 w-full  bg-white rounded-lg">
-      {/* <p className="text-lg">Nome: João da Silva</p> */}
       <div onClick={prevMonth} className="cursor-pointer">
         <ChevronLeft />
       </div>

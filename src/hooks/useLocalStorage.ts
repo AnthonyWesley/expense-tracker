@@ -6,6 +6,7 @@ export default function useLocalStorage() {
       ...item,
       date: item.date.toISOString(),
     }));
+
     localStorage.setItem(".", JSON.stringify(itemsToStore));
   };
 

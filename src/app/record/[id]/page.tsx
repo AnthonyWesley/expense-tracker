@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
@@ -10,12 +9,7 @@ import {
   handleRefValues,
   newDateAdjusted,
 } from "@/helpers/dateFilter";
-import {
-  ArrowDownFromLine,
-  ArrowUpFromLine,
-  FileSignature,
-  MoveLeft,
-} from "lucide-react";
+import { ArrowDownFromLine, ArrowUpFromLine, MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ModalForm from "../../../components/Modal";
 import GenericButton from "@/components/GenericButton";

@@ -16,7 +16,6 @@ export default function Expenses() {
             <p key={index}>{item.category}</p>
           ))}
         </div>
-        {/* <p className="text-2xl font-bold">R$ 250.00</p> */}
       </div>
     </section>
   );

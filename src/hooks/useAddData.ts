@@ -90,33 +90,6 @@ export default function useAddData() {
     refs.dateRef.current = null;
   };
 
-  const handleInfosValidation = (refList: RefsType) => {
-    let errors: string[] = [];
-    const titleValue = (refList.titleRef.current as HTMLInputElement).value;
-    const valueValue = (refList.valueRef.current as HTMLInputElement).value;
-    const categoryValue = refList.categoryRef.current as HTMLInputElement;
-    const dateValue = (refList.dateRef.current as HTMLInputElement).value;
-
-    if (isNaN(new Date(dateValue).getTime())) {
-      errors.push("Data inválida!");
-    }
-    if (!categoryKeys.includes(handleRefValues(categoryValue) as string)) {
-      errors.push("Categoria inválida!");
-    }
-    if (titleValue === "") {
-      errors.push("Título vazio!");
-    }
-    if (parseInt(valueValue) <= 0 || !parseInt(valueValue)) {
-      errors.push("Valor inválido!");
-    }
-    if (errors.length > 0) {
-      alert(errors.join("\n"));
-    } else {
-      clearFields();
-      return true;
-    }
-  };
-
   useEffect(() => {
     const storedList = getLocalStorage();
     if (storedList) {

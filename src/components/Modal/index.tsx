@@ -14,13 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "../ui/button";
+
 import { Label } from "../ui/label";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
 import { CategoriesType } from "@/type/CategoriesType";
 import { Textarea } from "../ui/textarea";
 import GenericButton from "../GenericButton";
+import { handleRefValues } from "@/helpers/dateFilter";
+import { RefsType } from "@/type/RefsType";
 
 type ModalProp = {
   modalName?: string | JSX.Element;
@@ -41,6 +43,7 @@ const ModalTest = ({
 }: ModalProp) => {
   const { refs } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
+  let categoryKeys: string[] = Object.keys(categories);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -52,7 +55,6 @@ const ModalTest = ({
 
   const handleSubmit = () => {
     setIsOpen(false);
-
     if (funcActions && funcActions.funcOne) {
       funcActions.funcOne();
     }
@@ -74,7 +76,7 @@ const ModalTest = ({
     const expense: CategoriesType = {};
 
     for (const key in cat) {
-      if (cat[key].expense) {
+      if (cat[key]?.expense) {
         expense[key] = cat[key];
       } else {
         income[key] = cat[key];
@@ -95,7 +97,7 @@ const ModalTest = ({
         <DialogTrigger>
           <div onClick={handleOpen}>{modalName}</div>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="bg-gray-200">
           <DialogHeader>
             <DialogTitle>{headerTitle}</DialogTitle>
           </DialogHeader>
