@@ -91,6 +91,7 @@ export default function useAddData() {
   };
 
   useEffect(() => {
+    updateLocalStorage();
     const storedList = getLocalStorage();
     if (storedList) {
       setList(storedList);
