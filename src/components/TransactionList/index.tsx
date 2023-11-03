@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/table";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
-import { FormattedCurrency, formatDate } from "@/helpers/dateFilter";
+import { formatDate } from "@/helpers/dateFilter";
+import { FormattedCurrency, formattedText } from "@/helpers/others";
 import { ArrowDownFromLine, ArrowUpFromLine } from "lucide-react";
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ export function TransactionList() {
           <TableRow className="bg-gray-200">
             <TableHead className="w-[100px]">TIPO</TableHead>
             <TableHead className="w-[100px]">CATEGORIA</TableHead>
-            <TableHead className="flex-1">DESCRIÇÃO</TableHead>
+            <TableHead>DESCRIÇÃO</TableHead>
             <TableHead className="w-[100px]">VALOR</TableHead>
             <TableHead className="text-right w-[200px]">DATA</TableHead>
           </TableRow>
@@ -50,7 +51,7 @@ export function TransactionList() {
               >
                 {categories[invoice.category]?.title}
               </TableCell>
-              <TableCell>{invoice.title}</TableCell>
+              <TableCell>{formattedText(invoice.title)}</TableCell>
               <TableCell
                 style={{
                   color: categories[invoice.category]?.expense

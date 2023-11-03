@@ -21,8 +21,6 @@ import { categories } from "@/data/categories";
 import { CategoriesType } from "@/type/CategoriesType";
 import { Textarea } from "../ui/textarea";
 import GenericButton from "../GenericButton";
-import { handleRefValues } from "@/helpers/dateFilter";
-import { RefsType } from "@/type/RefsType";
 
 type ModalProp = {
   modalName?: string | JSX.Element;

@@ -1,10 +1,11 @@
 import { categories } from "@/data/categories";
-import { handleRefValues, newDateAdjusted } from "@/helpers/dateFilter";
+import { newDateAdjusted } from "@/helpers/dateFilter";
 import { ItemType } from "@/type/ItemType";
 import { RefsType } from "@/type/RefsType";
 import { useEffect, useRef, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { useRouter } from "next/navigation";
+import { handleRefValues } from "@/helpers/others";
 
 export default function useAddData() {
   const [list, setList] = useState<ItemType[]>([]);
@@ -91,24 +92,24 @@ export default function useAddData() {
   };
 
   useEffect(() => {
-    updateLocalStorage();
+    // updateLocalStorage();
     const storedList = getLocalStorage();
     if (storedList) {
       setList(storedList);
     }
   }, []);
 
-  function updateLocalStorage() {
-    const storedData = JSON.parse(localStorage.getItem(".") || "[]");
-    const updatedItems = storedData.map((item: any) => {
-      if (item.category === "personalCare") {
-        item.category = "care";
-      }
-      return item;
-    });
-    localStorage.setItem(".", JSON.stringify(updatedItems));
-    return updatedItems;
-  }
+  // function updateLocalStorage() {
+  //   const storedData = JSON.parse(localStorage.getItem(".") || "[]");
+  //   const updatedItems = storedData.map((item: any) => {
+  //     if (item.category === "personalCare") {
+  //       item.category = "care";
+  //     }
+  //     return item;
+  //   });
+  //   localStorage.setItem(".", JSON.stringify(updatedItems));
+  //   return updatedItems;
+  // }
 
   return { refs, handleAddEvent, handleDeleteItem, handleEditItem, list };
 }

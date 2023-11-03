@@ -2,17 +2,16 @@
 import { Separator } from "@/components/ui/separator";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
-import {
-  FormattedCurrency,
-  findItemByParams,
-  formatDate,
-  handleRefValues,
-  newDateAdjusted,
-} from "@/helpers/dateFilter";
+import { formatDate, newDateAdjusted } from "@/helpers/dateFilter";
 import { ArrowDownFromLine, ArrowUpFromLine, MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ModalForm from "../../../components/Modal";
 import GenericButton from "@/components/GenericButton";
+import {
+  findItemByParams,
+  FormattedCurrency,
+  handleRefValues,
+} from "@/helpers/others";
 
 export default function Record({ params }: { params: { id: string } }) {
   const { list, handleDeleteItem, handleEditItem, refs } = useAppContext();

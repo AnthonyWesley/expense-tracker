@@ -1,6 +1,5 @@
 "use client";
 import { useAppContext } from "@/context";
-import { FormattedCurrency } from "@/helpers/dateFilter";
 import {
   ArrowDownFromLine,
   ArrowUpFromLine,
@@ -8,6 +7,7 @@ import {
   PlusCircle,
 } from "lucide-react";
 import ModalForm from "../Modal";
+import { FormattedCurrency } from "@/helpers/others";
 
 export default function FinancialSummary() {
   const { income, expense, handleAddEvent } = useAppContext();

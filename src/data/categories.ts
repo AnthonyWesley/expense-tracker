@@ -3,7 +3,7 @@ import { CategoriesType } from "@/type/CategoriesType";
 export const categories: CategoriesType = {
   RECEITA: { title: "RECEITA", color: "green", expense: false },
   supermarket: { title: "MERCADO", color: "brown", expense: true },
-  drugstore: { title: "FARMÁCIA", color: "crimson", expense: true },
+  // drugstore: { title: "FARMÁCIA", color: "crimson", expense: true },
   goods: { title: "BENS", color: "sienna", expense: true },
   care: {
     title: "CUIDADO PESSOAL",

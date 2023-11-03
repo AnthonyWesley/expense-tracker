@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppContext } from "@/context";
-import { FormattedCurrency } from "@/helpers/dateFilter";
+import { FormattedCurrency } from "@/helpers/others";
 import { Eye, EyeOff, Wallet2 } from "lucide-react";
 import { useState } from "react";
 
