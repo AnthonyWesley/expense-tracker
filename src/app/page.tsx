@@ -1,4 +1,5 @@
 "use client";
+import Expenses from "@/components/Expenses";
 import FinancialSummary from "@/components/FinancialSummary";
 import HeaderInfo from "@/components/HeaderInfo";
 import { TransactionList } from "@/components/TransactionList";
@@ -13,7 +14,7 @@ export default function Home() {
         <HeaderInfo />
         <WalletArea />
         <FinancialSummary />
-        {/* <Expenses /> */}
+        <Expenses />
         <TransactionList />
       </main>
 
