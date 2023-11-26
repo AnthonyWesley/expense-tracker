@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,8 @@ import { CategoriesType } from "@/type/CategoriesType";
 import { Textarea } from "../ui/textarea";
 import GenericButton from "../GenericButton";
 import { useRecordStore } from "@/store/useRecordStore";
-import Toast from "@/components/Toast";
+import { Toast } from "../Toast";
+import { toast } from "react-toastify";
 
 type ModalProp = {
   modalName?: string | JSX.Element;
@@ -52,9 +53,15 @@ const ModalTest = ({
     value,
   } = useRecordStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
+  const notify = useCallback(
+    (message: string) =>
+      toast.error(`${message}`, {
+        progress: undefined,
+      }),
 
-  const handleSubmit = () => {
+    [] // Adicione as dependências necessárias aqui, se houver
+  );
+  const handleSubmit = useCallback(() => {
     const newErrors = [];
     if (!Number(value)) newErrors.push("VALOR INVÁLIDO");
     if (title.length < 4) newErrors.push("DESCRIÇÃO INVÁLIDO");
@@ -62,8 +69,7 @@ const ModalTest = ({
     if (!category) newErrors.push("CATEGORIA INVÁLIDO");
 
     if (newErrors.length > 0) {
-      setErrors(newErrors);
-      // setIsOpen(false);
+      newErrors.forEach((item) => notify(item));
       return;
     }
 
@@ -80,7 +86,7 @@ const ModalTest = ({
     }
 
     setIsOpen(false);
-  };
+  }, [value, title, date, category, funcActions, notify]);
 
   const categorizeCategories = (cat: CategoriesType) => {
     const income: CategoriesType = {};
@@ -103,7 +109,6 @@ const ModalTest = ({
 
   useEffect(() => {
     if (!isOpen) {
-      setErrors([]);
       updateCategory("");
       updateDate("");
       updateTitle("");
@@ -113,13 +118,7 @@ const ModalTest = ({
 
   return (
     <>
-      <Toast activate={isOpen}>
-        {errors.map((item, index) => (
-          <h1 className="bg-blue-950 p-4 m-1 rounded-md " key={index}>
-            {item}
-          </h1>
-        ))}
-      </Toast>
+      <Toast />
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger>

@@ -9,14 +9,18 @@ export default function HeaderInfo() {
 
   return (
     <div>
-      <header className="flex justify-between items-center p-2 my-4 w-full bg-white rounded-lg">
-        <div onClick={prevMonth} className="cursor-pointer">
+      <header className="container m-auto fixed top-0 flex justify-between items-center bg-gray-800 text-white rounded-lg p-1 z-50 lg:text-2xl">
+        <div
+          onClick={prevMonth}
+          className="cursor-pointer hover:bg-slate-600 transition duration-300 p-4 rounded-sm"
+        >
           <ChevronLeft />
         </div>
-        <p className="text-lg md:ml-8 mobile-text-lg">
-          {dateHelpers.formatCurrentMonth(currentMonth)}
-        </p>
-        <div onClick={nextMonth} className="cursor-pointer">
+        <div>{dateHelpers.formatCurrentMonth(currentMonth).toUpperCase()}</div>
+        <div
+          onClick={nextMonth}
+          className="cursor-pointer hover:bg-slate-600 transition duration-300 p-4 rounded-sm"
+        >
           <ChevronRight />
         </div>
       </header>

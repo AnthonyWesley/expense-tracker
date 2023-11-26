@@ -8,7 +8,7 @@ const Navbar = () => {
   console.log(pathname);
 
   return (
-    <nav className="bg-gray-800 p-1 fixed bottom-0 left-0 w-full">
+    <nav className="container m-auto fixed bottom-0 flex justify-between bg-gray-800 text-white rounded-lg p-1 z-50 lg:text-1xl">
       <div className="container mx-auto flex justify-center items-center gap-4 text-white">
         <Link
           className="hover:bg-slate-600 transition duration-300 p-4 rounded-sm"

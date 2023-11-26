@@ -33,8 +33,8 @@ export default function Expenses() {
   };
 
   return (
-    <div className="rounded-lg w-full sm:w-1/2">
-      <div className="h-12  bg-gray-200 flex items-center p-2">
+    <div className="rounded-lg w-full lg:w-1/2">
+      <div className="h-12 bg-gray-200 flex items-center p-2">
         GRAFICO DE DESPESAS
       </div>
       <Chart
@@ -42,7 +42,8 @@ export default function Expenses() {
         data={data}
         options={options}
         width={"100%"}
-        style={{ backgroundColor: "white", height: 208 }}
+        style={{ backgroundColor: "white", borderRadius: 5 }}
+        className="h-96 lg:h-[300px]"
       />
     </div>
   );
