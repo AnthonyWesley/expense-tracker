@@ -1,26 +1,35 @@
 import { categories } from "@/data/categories";
-import { newDateAdjusted } from "@/helpers/dateFilter";
 import { ItemType } from "@/type/ItemType";
-import { RefsType } from "@/type/RefsType";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { useRouter } from "next/navigation";
-import { handleRefValues } from "@/helpers/others";
+import { DateHelpers } from "@/helpers/DateHelpers";
+import { useRecordStore } from "@/store/useRecordStore";
 
 export default function useAddData() {
-  const [list, setList] = useState<ItemType[]>([]);
+  const dateHelpers = new DateHelpers();
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
+  const {
+    title,
+    value,
+    category,
+    date,
+    updateCategory,
+    updateDate,
+    updateId,
+    updateTitle,
+    updateValue,
+  } = useRecordStore();
+
+  const [list, setList] = useState<ItemType[]>([]);
   const router = useRouter();
-
   const { v4: uuidv4 } = require("uuid");
-
-  const refs: RefsType = {
-    titleRef: useRef(null),
-    valueRef: useRef(null),
-    categoryRef: useRef(null),
-    dateRef: useRef(null),
-  };
   let categoryKeys: string[] = Object.keys(categories);
+
+  // const [title, setTitle] = useState("");
+  // const [value, setValue] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [date, setDate] = useState("");
 
   const handleAddItem = (item: ItemType) => {
     let newList = [...list];
@@ -51,44 +60,13 @@ export default function useAddData() {
   };
 
   const handleAddEvent = () => {
-    let errors: string[] = [];
-    const titleValue = (refs.titleRef.current as HTMLInputElement).value;
-    const valueValue = (refs.valueRef.current as HTMLInputElement).value;
-    const categoryValue = refs.categoryRef.current as HTMLInputElement;
-    const dateValue = (refs.dateRef.current as HTMLInputElement).value;
-
-    if (isNaN(new Date(dateValue).getTime())) {
-      errors.push("Data inválida!");
-    }
-    if (!categoryKeys.includes(handleRefValues(categoryValue) as string)) {
-      errors.push("Categoria inválida!");
-    }
-    if (titleValue === "") {
-      errors.push("Título vazio!");
-    }
-    if (parseInt(valueValue) <= 0 || !parseInt(valueValue)) {
-      errors.push("Valor inválido!");
-    }
-    if (errors.length > 0) {
-      alert(errors.join("\n"));
-    } else {
-      handleAddItem({
-        id: uuidv4(),
-        date: newDateAdjusted(dateValue),
-        category: handleRefValues(categoryValue) as string,
-        title: titleValue,
-        value: parseFloat(valueValue),
-      });
-
-      clearFields();
-    }
-  };
-
-  const clearFields = () => {
-    refs.titleRef.current = null;
-    refs.valueRef.current = null;
-    refs.categoryRef.current = null;
-    refs.dateRef.current = null;
+    handleAddItem({
+      id: uuidv4(),
+      date: dateHelpers.newDateAdjusted(date),
+      category: category,
+      title: title,
+      value: parseFloat(value),
+    });
   };
 
   useEffect(() => {
@@ -111,5 +89,20 @@ export default function useAddData() {
   //   return updatedItems;
   // }
 
-  return { refs, handleAddEvent, handleDeleteItem, handleEditItem, list };
+  return {
+    category,
+    date,
+    title,
+    value,
+
+    handleAddEvent,
+    handleDeleteItem,
+    handleEditItem,
+    list,
+
+    // setValue,
+    // setTitle,
+    // setCategory,
+    // setDate,
+  };
 }

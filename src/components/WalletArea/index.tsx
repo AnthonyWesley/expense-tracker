@@ -10,7 +10,7 @@ export default function WalletArea() {
   const [visibility, setVisibility] = useState(false);
 
   return (
-    <section className="w-full text-white rounded-lg p-2 flex flex-col justify-center items-center">
+    <section className="w-full col-span-2 col-start-1 row-start-1 text-white rounded-lg p-2 flex flex-col justify-center items-center">
       <div className="text-3xl font-bold flex items-center gap-3  rounded-md p-10 text-[mediumSpringGreen]">
         {!visibility && <Eye onClick={() => setVisibility(true)} />}
         {!visibility && (

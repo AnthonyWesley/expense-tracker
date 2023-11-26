@@ -9,13 +9,14 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div className="container  mx-auto rounded-lg m-2">
-      <main className="flex flex-col gap-2 m-2">
-        <HeaderInfo />
+    <div>
+      <main className="flex flex-col gap-2 mb-16">
         <WalletArea />
         <FinancialSummary />
-        <Expenses />
-        <TransactionList />
+        <div className="flex flex-col sm:flex-row gap-2 md:h-64 ">
+          <Expenses />
+          <TransactionList />
+        </div>
       </main>
 
       <footer className="w-full  bg-white rounded-lg"></footer>

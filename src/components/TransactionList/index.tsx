@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
-import { formatDate } from "@/helpers/dateFilter";
+import { DateHelpers } from "@/helpers/DateHelpers";
 import { FormattedCurrency, formattedText } from "@/helpers/others";
 import { ArrowDownFromLine, ArrowUpFromLine } from "lucide-react";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export function TransactionList() {
+  const dateHelpers = new DateHelpers();
   const { filteredList } = useAppContext();
   const router = useRouter();
 
@@ -25,7 +26,7 @@ export function TransactionList() {
     <>
       <Table className="bg-white rounded-lg">
         <TableHeader>
-          <TableRow className="bg-gray-200">
+          <TableRow className="bg-gray-200 ">
             <TableHead className="w-[100px]">TIPO</TableHead>
             <TableHead className="w-[100px]">CATEGORIA</TableHead>
             <TableHead>DESCRIÇÃO</TableHead>
@@ -62,16 +63,16 @@ export function TransactionList() {
                 {FormattedCurrency(invoice.value)}
               </TableCell>
               <TableCell className="text-right">
-                {formatDate(invoice.date)}
+                {dateHelpers.formatDate(invoice.date)}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-      </Table>
 
-      <Link href={`/record`} className="text-white text-center">
-        Movimentações.
-      </Link>
+        {/* <Link href={`/record`} className="text-white text-center">
+          Movimentações.
+        </Link> */}
+      </Table>
     </>
   );
 }

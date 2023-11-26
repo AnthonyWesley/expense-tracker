@@ -1,12 +1,15 @@
 import { categories } from "@/data/categories";
-import { filterListByMonth, getCurrentMonth } from "@/helpers/dateFilter";
 import { ItemType } from "@/type/ItemType";
-
+import { DateHelpers } from "@/helpers/DateHelpers";
 import { useEffect, useState } from "react";
 
 export default function useApplication(list: ItemType[]) {
+  const dateHelpers = new DateHelpers();
+
+  const [currentMonth, setCurrentMonth] = useState(
+    dateHelpers.getCurrentMonth()
+  );
   const [filteredList, setFilteredList] = useState<ItemType[]>([]);
-  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [walletBalance, setWalletBalance] = useState(0);
@@ -78,7 +81,7 @@ export default function useApplication(list: ItemType[]) {
   }, [filteredList]);
 
   useEffect(() => {
-    setFilteredList(filterListByMonth(list, currentMonth));
+    setFilteredList(dateHelpers.filterListByMonth(list, currentMonth));
   }, [list, currentMonth]);
 
   return {

@@ -2,19 +2,25 @@
 import { Separator } from "@/components/ui/separator";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
-import { formatDate, newDateAdjusted } from "@/helpers/dateFilter";
+import { DateHelpers } from "@/helpers/DateHelpers";
 import { ArrowDownFromLine, ArrowUpFromLine, MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ModalForm from "../../../components/Modal";
 import GenericButton from "@/components/GenericButton";
-import {
-  findItemByParams,
-  FormattedCurrency,
-  handleRefValues,
-} from "@/helpers/others";
+import { findItemByParams, FormattedCurrency } from "@/helpers/others";
 
 export default function Record({ params }: { params: { id: string } }) {
-  const { list, handleDeleteItem, handleEditItem, refs } = useAppContext();
+  const dateHelpers = new DateHelpers();
+  const {
+    list,
+    handleDeleteItem,
+    handleEditItem,
+    category,
+    date,
+    title,
+    value,
+  } = useAppContext();
+
   const router = useRouter();
   const listId = findItemByParams(list, params.id);
   if (listId === undefined) {
@@ -46,12 +52,12 @@ export default function Record({ params }: { params: { id: string } }) {
             <Separator orientation="vertical" />
             <div>{FormattedCurrency(listId?.value)}</div>
             <Separator orientation="vertical" />
-            <div>{formatDate(listId?.date)}</div>
+            <div>{dateHelpers.formatDate(listId?.date)}</div>
           </div>
 
           <Separator className="my-4 text-right" />
           <div className="flex h-5 items-center justify-end space-x-2 text-sm my-2">
-            <div onClick={() => router.push("/")}>
+            <div onClick={() => router.back()}>
               <GenericButton tailwind="bg-blue-950">
                 <MoveLeft size={21} />
               </GenericButton>
@@ -72,16 +78,10 @@ export default function Record({ params }: { params: { id: string } }) {
                 funcTwo: () =>
                   handleEditItem(params.id, {
                     id: params.id,
-                    date: newDateAdjusted(
-                      (refs.dateRef.current as HTMLInputElement).value
-                    ),
-                    category: handleRefValues(
-                      refs.categoryRef.current as HTMLInputElement
-                    ) as string,
-                    title: (refs.titleRef.current as HTMLInputElement).value,
-                    value: parseFloat(
-                      (refs.valueRef.current as HTMLInputElement).value
-                    ),
+                    date: dateHelpers.newDateAdjusted(date),
+                    category: category,
+                    title: title,
+                    value: parseFloat(value),
                   }),
               }}
             />

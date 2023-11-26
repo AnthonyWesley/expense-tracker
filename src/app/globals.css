@@ -4,6 +4,16 @@
 
 body {
   background-color: rgb(16, 27, 63);
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0.3rem /* 4.8px */;
+  padding-left: 0.3rem /* 4.8px */;
+}
+@media (min-width: 1400px) {
+  body {
+    max-width: 1400px;
+  }
 }
 
 @layer base {

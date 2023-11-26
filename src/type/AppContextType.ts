@@ -1,5 +1,5 @@
 import { ItemType } from "./ItemType";
-import { RefsType } from "./RefsType";
+
 export type ApplicationContext = {
   filteredList: ItemType[];
   currentMonth: string;
@@ -14,5 +14,13 @@ export type ApplicationContext = {
   handleDeleteItem: (id: string) => void;
   handleEditItem: (id: string, updatedItem: ItemType) => void;
 
-  refs: RefsType;
+  category: string;
+  date: string;
+  title: string;
+  value: string;
+
+  // setValue: React.Dispatch<React.SetStateAction<string>>;
+  // setTitle: React.Dispatch<React.SetStateAction<string>>;
+  // setCategory: React.Dispatch<React.SetStateAction<string>>;
+  // setDate: React.Dispatch<React.SetStateAction<string>>;
 };

@@ -12,8 +12,20 @@ export default function AppProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { refs, handleAddEvent, list, handleDeleteItem, handleEditItem } =
-    useAddData();
+  const {
+    handleAddEvent,
+    list,
+    handleDeleteItem,
+    handleEditItem,
+    // setCategory,
+    // setDate,
+    // setTitle,
+    // setValue,
+    category,
+    date,
+    title,
+    value,
+  } = useAddData();
 
   const {
     filteredList,
@@ -38,7 +50,16 @@ export default function AppProvider({
         handleDeleteItem,
         handleEditItem,
         list,
-        refs,
+
+        category,
+        date,
+        title,
+        value,
+
+        // setCategory,
+        // setDate,
+        // setTitle,
+        // setValue,
       }}
     >
       {children}

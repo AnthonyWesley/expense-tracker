@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,11 +16,13 @@ import {
 } from "@/components/ui/select";
 
 import { Label } from "../ui/label";
-import { useAppContext } from "@/context";
+
 import { categories } from "@/data/categories";
 import { CategoriesType } from "@/type/CategoriesType";
 import { Textarea } from "../ui/textarea";
 import GenericButton from "../GenericButton";
+import { useRecordStore } from "@/store/useRecordStore";
+import Toast from "@/components/Toast";
 
 type ModalProp = {
   modalName?: string | JSX.Element;
@@ -39,20 +41,32 @@ const ModalTest = ({
   funcActions,
   status,
 }: ModalProp) => {
-  const { refs } = useAppContext();
+  const {
+    updateCategory,
+    updateTitle,
+    updateValue,
+    updateDate,
+    date,
+    category,
+    title,
+    value,
+  } = useRecordStore();
   const [isOpen, setIsOpen] = useState(false);
-  let categoryKeys: string[] = Object.keys(categories);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleSubmit = () => {
-    setIsOpen(false);
+    const newErrors = [];
+    if (!Number(value)) newErrors.push("VALOR INVÁLIDO");
+    if (title.length < 4) newErrors.push("DESCRIÇÃO INVÁLIDO");
+    if (!date) newErrors.push("DATA INVÁLIDO");
+    if (!category) newErrors.push("CATEGORIA INVÁLIDO");
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      // setIsOpen(false);
+      return;
+    }
+
     if (funcActions && funcActions.funcOne) {
       funcActions.funcOne();
     }
@@ -64,11 +78,10 @@ const ModalTest = ({
     if (funcActions && funcActions.funcTree) {
       funcActions.funcTree();
     }
+
+    setIsOpen(false);
   };
 
-  const handleSelectValueChange = (selectedValue: any | string) => {
-    refs.categoryRef.current = selectedValue;
-  };
   const categorizeCategories = (cat: CategoriesType) => {
     const income: CategoriesType = {};
     const expense: CategoriesType = {};
@@ -85,15 +98,32 @@ const ModalTest = ({
   };
 
   const categorizedCategories = categorizeCategories(categories);
-
   const incomeKeys: string[] = Object.keys(categorizedCategories.income);
   const expenseKeys: string[] = Object.keys(categorizedCategories.expense);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setErrors([]);
+      updateCategory("");
+      updateDate("");
+      updateTitle("");
+      updateValue("");
+    }
+  }, [isOpen]);
+
   return (
     <>
-      <Dialog>
+      <Toast activate={isOpen}>
+        {errors.map((item, index) => (
+          <h1 className="bg-blue-950 p-4 m-1 rounded-md " key={index}>
+            {item}
+          </h1>
+        ))}
+      </Toast>
+
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger>
-          <div onClick={handleOpen}>{modalName}</div>
+          <div>{modalName}</div>
         </DialogTrigger>
         <DialogContent className="bg-gray-200">
           <DialogHeader>
@@ -103,7 +133,7 @@ const ModalTest = ({
             <div className="flex flex-col gap-1">
               <Label className="text-sm text-gray-700">VALOR</Label>
               <Input
-                ref={refs.valueRef}
+                onChange={(e) => updateValue(e.target.value)}
                 placeholder="Ex: 10,00"
                 type="number"
                 required
@@ -114,7 +144,7 @@ const ModalTest = ({
               {status == "expense" && (
                 <>
                   <Label className="text-sm text-gray-700">CATEGORIAS</Label>
-                  <Select onValueChange={handleSelectValueChange}>
+                  <Select onValueChange={updateCategory}>
                     <SelectTrigger>
                       <SelectValue placeholder="Escolha a Categoria" />
                     </SelectTrigger>
@@ -133,33 +163,46 @@ const ModalTest = ({
                 <>
                   <Label className="text-sm text-gray-700">CATEGORIAS</Label>
 
-                  <Input
-                    ref={refs.categoryRef}
+                  {/* <Input
+                    onChange={(e) => setCategory(e.target.value)}
                     value={incomeKeys[0]}
                     disabled
-                  />
+                  // /> */}
+
+                  <Select onValueChange={updateCategory}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Escolha a Categoria" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={incomeKeys[0]}>
+                        {incomeKeys[0]}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </>
               )}
             </div>
 
             <div className="flex flex-col gap-1">
               <Label className="text-sm text-gray-700">DATA</Label>
-              <Input ref={refs.dateRef} type="date" required />
+              <Input
+                type="date"
+                onChange={(e) => updateDate(e.target.value)}
+                required
+              />
             </div>
 
             <div className="flex flex-col gap-1">
               <Label className="text-sm text-gray-700">DESCRIÇÃO</Label>
-              <Textarea
-                ref={refs.titleRef as React.RefObject<HTMLTextAreaElement>}
-              />
+              <Textarea onChange={(e) => updateTitle(e.target.value)} />
             </div>
           </div>
           <div className="flex justify-end">
-            <DialogTrigger>
-              <div onClick={handleSubmit}>
-                <GenericButton tailwind="bg-blue-950">REGISTRAR</GenericButton>
-              </div>
-            </DialogTrigger>
+            {/* <DialogTrigger> */}
+            <div onClick={handleSubmit}>
+              <GenericButton tailwind="bg-blue-950">REGISTRAR</GenericButton>
+            </div>
+            {/* </DialogTrigger> */}
           </div>
         </DialogContent>
       </Dialog>

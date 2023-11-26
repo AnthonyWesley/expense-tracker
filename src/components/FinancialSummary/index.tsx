@@ -13,7 +13,7 @@ export default function FinancialSummary() {
   const { income, expense, handleAddEvent } = useAppContext();
 
   return (
-    <section className="w-full bg-gray-200 rounded-lg p-2 flex flex-col justify-center">
+    <section className="w-full col-span-2 col-start-1 row-start-2 bg-gray-200 rounded-lg p-2 flex flex-col justify-center">
       <div className="flex flex-col justify-between gap-3">
         <div className="flex justify-between items-center bg-white  text-green-600 rounded-lg shadow-[0px_0px_0px_1px_rgba(0,0,0,0.20)] p-2">
           <ArrowDownFromLine color="green" size={30} />
