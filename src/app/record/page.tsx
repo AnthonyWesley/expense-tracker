@@ -8,8 +8,8 @@ import React from "react";
 export default function Record() {
   const router = useRouter();
   return (
-    <div className="flex flex-col gap-2 justify-between items-center">
-      <div className="  p-2 w-full  bg-white rounded-lg">
+    <div className="flex flex-col gap-2 my-16 justify-between items-center">
+      <div className="p-2 w-full bg-white rounded-lg">
         <TransactionList />
       </div>
       <div onClick={() => router.back()}>

@@ -8,27 +8,27 @@ const Navbar = () => {
   console.log(pathname);
 
   return (
-    <nav className="container m-auto fixed bottom-0 flex justify-between bg-gray-800 text-white rounded-lg p-1 z-50 lg:text-1xl">
-      <div className="container mx-auto flex justify-center items-center gap-4 text-white">
+    <nav className="w-full fixed bottom-0 left-0 ">
+      <div className="Container flex justify-center items-center gap-2 bg-appSecondaryColor rounded-lg p-1 z-50 text-sm lg:text-xl">
         <Link
-          className="hover:bg-slate-600 transition duration-300 p-4 rounded-sm"
+          className="hover:bg-appPrimaryColor transition duration-300 p-4 rounded-sm"
           href={"/record"}
-          style={{ backgroundColor: pathname == "/record" ? "#778899" : "" }}
+          style={{ backgroundColor: pathname == "/record" ? "#164e63" : "" }}
         >
           REGISTROS
         </Link>
         <Link
-          className="hover:bg-slate-600 transition duration-300 p-4 rounded-sm"
+          className="hover:bg-appPrimaryColor transition duration-300 p-4 rounded-sm"
           href={"/"}
-          style={{ backgroundColor: pathname == "/" ? "#778899" : "" }}
+          style={{ backgroundColor: pathname == "/" ? "#164e63" : "" }}
         >
           HOME
         </Link>
         <Link
-          className="hover:bg-slate-600 transition duration-300 p-4 rounded-sm"
+          className="hover:bg-appPrimaryColor transition duration-300 p-4 rounded-sm"
           href={"detailedRecord"}
           style={{
-            backgroundColor: pathname == "/detailedRecord" ? "#778899" : "",
+            backgroundColor: pathname == "/detailedRecord" ? "#164e63" : "",
           }}
         >
           DETALHADOS

@@ -5,7 +5,7 @@ import { TableBody, TableRow, TableCell, Table } from "@/components/ui/table";
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
 import { DateHelpers } from "@/helpers/DateHelpers";
-import { FormattedCurrency, getAllSunForCategories } from "@/helpers/others";
+import { formattedCurrency, getAllSunForCategories } from "@/helpers/others";
 import { MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +15,7 @@ export default function DetailedRecord() {
   const router = useRouter();
 
   return (
-    <div className="container  mx-auto rounded-lg mb-16">
+    <div className="container  mx-auto rounded-lg my-16 text-appSecondaryColor">
       {getAllSunForCategories(filteredList).expenseList.map((item, index) => (
         <div key={index} className="bg-white my-2 rounded-lg">
           <div
@@ -39,7 +39,7 @@ export default function DetailedRecord() {
                     {title}
                   </TableCell>
                   <TableCell className="w-[100px] text-red-500">
-                    {FormattedCurrency(value)}
+                    {formattedCurrency(value)}
                   </TableCell>
                 </TableRow>
               ))}
@@ -49,7 +49,7 @@ export default function DetailedRecord() {
                   TOTAL DE {categories[item.category].title}
                 </TableCell>
                 <TableCell className="w-[100px] text-xl text-red-500 font-semibold underline underline-offset-4">
-                  {FormattedCurrency(item.totalValue)}
+                  {formattedCurrency(item.totalValue)}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -64,7 +64,7 @@ export default function DetailedRecord() {
         </div>
         <div className="flex flex-col items-center justify-center">
           <p>TOTAL DE GASTOS DO MÊS</p>
-          <h1 className="text-4xl"> {FormattedCurrency(expense)}</h1>
+          <h1 className="text-4xl"> {formattedCurrency(expense)}</h1>
         </div>
       </div>
     </div>

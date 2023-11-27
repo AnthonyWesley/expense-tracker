@@ -1,7 +1,7 @@
 import { categories } from "@/data/categories";
 import { ItemType } from "@/type/ItemType";
 
-export const FormattedCurrency = (currency: number): string => {
+export const formattedCurrency = (currency: number): string => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",

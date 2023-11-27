@@ -11,7 +11,7 @@ import {
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
 import { DateHelpers } from "@/helpers/DateHelpers";
-import { FormattedCurrency, formattedText } from "@/helpers/others";
+import { formattedCurrency, formattedText } from "@/helpers/others";
 import { ArrowDownFromLine, ArrowUpFromLine } from "lucide-react";
 import Link from "next/link";
 
@@ -23,8 +23,9 @@ export function TransactionList() {
   const router = useRouter();
 
   return (
-    <>
-      <Table className="bg-white rounded-lg">
+    <section className="bg-appSecondaryColor w-full rounded-md overflow-hidden ">
+      <div className="text-center p-4">MOVIMENTAÇÕES</div>
+      <Table className="bg-white">
         <TableHeader>
           <TableRow className="bg-gray-200 ">
             <TableHead className="w-[100px]">TIPO</TableHead>
@@ -34,7 +35,7 @@ export function TransactionList() {
             <TableHead className="text-right w-[200px]">DATA</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="text-appSecondaryColor">
           {filteredList.map((invoice, index) => (
             <TableRow
               key={index}
@@ -47,12 +48,14 @@ export function TransactionList() {
                 )) || <ArrowDownFromLine color="green" />}
               </TableCell>
               <TableCell
-                className="text-white font-bold rounded-lg"
+                className="font-bold rounded-lg text-white"
                 style={{ backgroundColor: categories[invoice.category]?.color }}
               >
                 {categories[invoice.category]?.title}
               </TableCell>
-              <TableCell>{formattedText(invoice.title)}</TableCell>
+              <TableCell className=" ">
+                {formattedText(invoice.title)}
+              </TableCell>
               <TableCell
                 style={{
                   color: categories[invoice.category]?.expense
@@ -60,7 +63,7 @@ export function TransactionList() {
                     : "green",
                 }}
               >
-                {FormattedCurrency(invoice.value)}
+                {formattedCurrency(invoice.value)}
               </TableCell>
               <TableCell className="text-right">
                 {dateHelpers.formatDate(invoice.date)}
@@ -73,6 +76,6 @@ export function TransactionList() {
           Movimentações.
         </Link> */}
       </Table>
-    </>
+    </section>
   );
 }

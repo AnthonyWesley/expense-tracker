@@ -2,7 +2,7 @@
 import { useAppContext } from "@/context";
 import { categories } from "@/data/categories";
 import { DateHelpers } from "@/helpers/DateHelpers";
-import { FormattedCurrency, getAllSunForCategories } from "@/helpers/others";
+import { formattedCurrency, getAllSunForCategories } from "@/helpers/others";
 
 import { Chart } from "react-google-charts";
 
@@ -12,7 +12,7 @@ export default function Expenses() {
   const dataWithoutHeader = getAllSunForCategories(
     filteredList
   ).expenseList.map((item) => [
-    `${categories[item.category]?.title} - ${FormattedCurrency(
+    `${categories[item.category]?.title} - ${formattedCurrency(
       item.totalValue
     )}`,
     // FormattedCurrency(item.totalValue),
@@ -33,18 +33,17 @@ export default function Expenses() {
   };
 
   return (
-    <div className="rounded-lg w-full lg:w-1/2">
-      <div className="h-12 bg-gray-200 flex items-center p-2">
-        GRAFICO DE DESPESAS
+    <section className="rounded-md w-full lg:w-1/2 bg-appSecondaryColor overflow-hidden">
+      <div className="text-center p-4">GRÁFICO DE DESPESAS</div>
+      <div className="bg-gray-200">
+        <Chart
+          chartType="PieChart"
+          data={data}
+          options={options}
+          style={{ borderRadius: 3 }}
+          className="h-96 lg:relative bottom-14"
+        />
       </div>
-      <Chart
-        chartType="PieChart"
-        data={data}
-        options={options}
-        width={"100%"}
-        style={{ backgroundColor: "white", borderRadius: 5 }}
-        className="h-96 lg:h-[300px]"
-      />
-    </div>
+    </section>
   );
 }

@@ -14,7 +14,7 @@ export default function Home() {
         <WalletArea />
 
         <FinancialSummary />
-        <div className="flex flex-col lg:flex-row gap-2 lg:h-[300px] ">
+        <div className="flex flex-col lg:flex-row gap-2 lg:h-[335px] ">
           <Expenses />
           <TransactionList />
         </div>

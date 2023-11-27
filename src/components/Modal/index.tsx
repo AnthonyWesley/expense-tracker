@@ -117,7 +117,7 @@ const ModalTest = ({
   }, [isOpen]);
 
   return (
-    <>
+    <section>
       <Toast />
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -125,12 +125,12 @@ const ModalTest = ({
           <div>{modalName}</div>
         </DialogTrigger>
         <DialogContent className="bg-gray-200">
-          <DialogHeader>
+          <DialogHeader className="text-appSecondaryColor">
             <DialogTitle>{headerTitle}</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col m-4 gap-3">
             <div className="flex flex-col gap-1">
-              <Label className="text-sm text-gray-700">VALOR</Label>
+              <Label className="text-sm text-appSecondaryColor">VALOR</Label>
               <Input
                 onChange={(e) => updateValue(e.target.value)}
                 placeholder="Ex: 10,00"
@@ -142,14 +142,20 @@ const ModalTest = ({
             <div className="flex flex-col gap-1">
               {status == "expense" && (
                 <>
-                  <Label className="text-sm text-gray-700">CATEGORIAS</Label>
+                  <Label className="text-sm text-appSecondaryColor">
+                    CATEGORIAS
+                  </Label>
                   <Select onValueChange={updateCategory}>
-                    <SelectTrigger>
+                    <SelectTrigger className="text-appSecondaryColor">
                       <SelectValue placeholder="Escolha a Categoria" />
                     </SelectTrigger>
                     <SelectContent>
                       {expenseKeys.map((item, index) => (
-                        <SelectItem key={index} value={item}>
+                        <SelectItem
+                          key={index}
+                          value={item}
+                          className="text-appSecondaryColor"
+                        >
                           {categories[item].title}
                         </SelectItem>
                       ))}
@@ -160,16 +166,12 @@ const ModalTest = ({
 
               {status === "income" && (
                 <>
-                  <Label className="text-sm text-gray-700">CATEGORIAS</Label>
-
-                  {/* <Input
-                    onChange={(e) => setCategory(e.target.value)}
-                    value={incomeKeys[0]}
-                    disabled
-                  // /> */}
+                  <Label className="text-sm text-appSecondaryColor">
+                    CATEGORIAS
+                  </Label>
 
                   <Select onValueChange={updateCategory}>
-                    <SelectTrigger>
+                    <SelectTrigger className="text-appSecondaryColor">
                       <SelectValue placeholder="Escolha a Categoria" />
                     </SelectTrigger>
                     <SelectContent>
@@ -183,29 +185,37 @@ const ModalTest = ({
             </div>
 
             <div className="flex flex-col gap-1">
-              <Label className="text-sm text-gray-700">DATA</Label>
+              <Label className="text-sm text-appSecondaryColor">DATA</Label>
               <Input
                 type="date"
                 onChange={(e) => updateDate(e.target.value)}
+                className="text-appSecondaryColor"
                 required
               />
             </div>
 
             <div className="flex flex-col gap-1">
-              <Label className="text-sm text-gray-700">DESCRIÇÃO</Label>
-              <Textarea onChange={(e) => updateTitle(e.target.value)} />
+              <Label className="text-sm text-appSecondaryColor">
+                DESCRIÇÃO
+              </Label>
+              <Textarea
+                onChange={(e) => updateTitle(e.target.value)}
+                className="text-appSecondaryColor"
+              />
             </div>
           </div>
           <div className="flex justify-end">
             {/* <DialogTrigger> */}
             <div onClick={handleSubmit}>
-              <GenericButton tailwind="bg-blue-950">REGISTRAR</GenericButton>
+              <GenericButton tailwind="bg-appSecondaryColor">
+                REGISTRAR
+              </GenericButton>
             </div>
             {/* </DialogTrigger> */}
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </section>
   );
 };
 
