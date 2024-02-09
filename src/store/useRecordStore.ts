@@ -4,7 +4,7 @@ export type Record = {
   id?: string;
   date: string;
   category: string;
-  title: string;
+  description: string;
   value: string;
 };
 
@@ -12,7 +12,7 @@ type ActionsRecord = {
   updateId: (id: string) => void;
   updateDate: (data: string) => void;
   updateCategory: (category: string) => void;
-  updateTitle: (title: string) => void;
+  updateDescription: (description: string) => void;
   updateValue: (value: string) => void;
 };
 
@@ -20,12 +20,12 @@ export const useRecordStore = create<Record & ActionsRecord>((set) => ({
   id: "",
   date: "",
   category: "",
-  title: "",
+  description: "",
   value: "",
 
   updateId: (id) => set(() => ({ id: id })),
   updateDate: (date) => set(() => ({ date: date })),
   updateCategory: (category) => set(() => ({ category: category })),
-  updateTitle: (title) => set(() => ({ title: title })),
+  updateDescription: (description) => set(() => ({ description: description })),
   updateValue: (value) => set(() => ({ value: value })),
 }));

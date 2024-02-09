@@ -1,13 +1,13 @@
-import { ItemType } from "@/type/ItemType";
+import { RecordType } from "../type/RecordType";
 
-export class DateHelpers {
+class DateHelpers {
   getCurrentMonth = () => {
     const now = new Date();
     return `${now.getFullYear()}-${now.getMonth() + 1}`;
   };
 
-  filterListByMonth = (list: ItemType[], date: string): ItemType[] => {
-    let newList: ItemType[] = [];
+  filterListByMonth = (list: RecordType[], date: string): RecordType[] => {
+    let newList: RecordType[] = [];
     let [year, month] = date.split("-");
 
     for (let i in list) {
@@ -67,3 +67,5 @@ export class DateHelpers {
     return adjustedDate;
   };
 }
+
+export const dateHelpers = new DateHelpers();

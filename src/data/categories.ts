@@ -1,4 +1,4 @@
-import { CategoriesType } from "@/type/CategoriesType";
+import { CategoriesType } from "../type/CategoriesType";
 
 export const categories: CategoriesType = {
   RECEITA: { title: "RECEITA", color: "green", expense: false },

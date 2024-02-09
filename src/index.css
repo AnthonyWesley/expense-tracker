@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #030712;
+  color: white;
+  height: 100vh;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0.3rem /* 4.8px */;
+  padding-left: 0.3rem /* 4.8px */;
+  /* font-size: 1.2rem; */
+  font-family: "Montserrat", sans-serif;
+}
+@media (min-width: 1400px) {
+  body {
+    max-width: 1400px;
+  }
+}
+
+.no-spin-arrows::-webkit-outer-spin-g_button,
+.no-spin-arrows::-webkit-inner-spin-g_button {
+  -webkit-appearance: none;
+  margin: 0;
+}

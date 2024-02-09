@@ -1,6 +1,6 @@
-// import { ItemType } from "@/type/ItemType";
+// import { RecordType } from "@/type/RecordType";
 
-// export const items: ItemType[] = [
+// export const items: RecordType[] = [
 //   {
 //     id: 0,
 //     date: new Date(2023, 9, 1),
