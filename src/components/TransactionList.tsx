@@ -11,7 +11,7 @@ export function TransactionList() {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full mb-16 bg-appSecondaryColor rounded-md col-span-2 h-[350px] overflow-hidden">
+    <section className="w-full mb-16 bg-appSecondaryColor rounded-md col-span-3 h-[350px] overflow-hidden">
       <div className="text-center p-4">MOVIMENTAÇÕES</div>
       <div className="h-[290px] overflow-y-scroll">
         <table className="min-w-full bg-transparent border border-white/10">

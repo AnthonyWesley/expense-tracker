@@ -2,13 +2,12 @@ import { useAppManager } from "../context/AppManagerContext";
 import { categories } from "../data/categories";
 import { getAllSunForCategories } from "../helpers/others";
 //@ts-ignore
-import CanvasJSReact from "@canvasjs/react-charts"; // Importando a biblioteca CanvasJS diretamente
+import CanvasJSReact from "@canvasjs/react-charts";
 
 export default function Expenses() {
   const { filteredList } = useAppManager();
 
-  const CanvasJSChart = CanvasJSReact.CanvasJSChart; // Obtendo o componente Chart da biblioteca
-
+  var CanvasJSChart = CanvasJSReact.CanvasJSChart;
   const dataRecord = getAllSunForCategories(filteredList).expenseList.map(
     (record) => ({
       y: record.totalValue,
@@ -20,6 +19,8 @@ export default function Expenses() {
   const options = {
     animationEnabled: true,
     backgroundColor: "#1f2937",
+    // exportFileName: "New Year Resolutions",
+    // exportEnabled: true,
     showInLegend: true,
     height: 340,
     data: [
@@ -28,6 +29,7 @@ export default function Expenses() {
         type: "pie",
         startAngle: 0,
         indexLabelFontColor: "white",
+        //innerRadius: 60,
         indexLabelFontSize: 13,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
@@ -35,7 +37,6 @@ export default function Expenses() {
       },
     ],
   };
-
   return (
     <section className="w-full bg-appSecondaryColor rounded-md col-span-1 h-[350px] overflow-hidden">
       <div className="text-center p-4">GRÁFICO DE DESPESAS</div>
