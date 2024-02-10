@@ -37,6 +37,8 @@ export default function Record() {
     return [];
   }
 
+  console.log(listId.updatedAt);
+
   return (
     <div className="container mx-auto rounded-lg my-20 p-4 bg-white">
       <div className="space-y-1">
@@ -65,6 +67,11 @@ export default function Record() {
         <div>{formattedCurrency(listId?.value)}</div>
         <hr />
         <div>{dateHelpers.formatDate(listId?.date)}</div>
+        {/* <hr /> */}
+        {/* <div>
+          Registro Atualizado{" "}
+          {dateHelpers.formatDate(new Date(listId?.updatedAt))}
+        </div> */}
       </div>
 
       <hr className="my-4 text-right" />
@@ -96,7 +103,7 @@ export default function Record() {
         </G_Button>
       </div>
       <G_Alert
-        description="Deseja fazer o logout ?"
+        description="Deseja deletar o registro?"
         isOpen={isAlertOpen}
         onClose={closeAlert}
         functionProp={{

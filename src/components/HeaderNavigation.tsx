@@ -26,7 +26,7 @@ export default function HeaderNavigation() {
   return (
     <header className="w-full fixed top-0 left-0 bg-appSecondaryColor rounded-lg p-1 z-30 lg:text-2xl">
       <div className="Container flex justify-between items-center">
-        <div className="invisible">$$$</div>
+        <div className="invisible">$$$$</div>
         <div
           onClick={prevMonth}
           className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-4 rounded-sm"

@@ -20,7 +20,14 @@ export default function ApiProvider({
 
   async function registerUser(user: UserType) {
     try {
-      const response = await axiosInstance.post("/register", user);
+      const response = await axios.post(
+        "https://expense-tracker-api-e91c.onrender.com/register",
+        user,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
       return response;
     } catch (error: any) {
       return console.error("Erro ao registrar uruário:", error.message);

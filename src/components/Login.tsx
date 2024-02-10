@@ -49,10 +49,10 @@ export const Login = () => {
         icon={<LockKeyhole />}
       />
       <G_Button
-        className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
+        className="w-full text-center flex justify-center bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
         onClick={handleLogin}
       >
-        Login
+        LOGIN
       </G_Button>
     </div>
   );

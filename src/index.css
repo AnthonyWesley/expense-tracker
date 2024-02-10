@@ -20,8 +20,8 @@ body {
   }
 }
 
-.no-spin-arrows::-webkit-outer-spin-g_button,
-.no-spin-arrows::-webkit-inner-spin-g_button {
+.no-spin-arrows::-webkit-outer-spin-button,
+.no-spin-arrows::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

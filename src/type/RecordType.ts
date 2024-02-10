@@ -1,8 +1,8 @@
 export type RecordType = {
   id?: string;
   date: Date;
-  created_at?: Date;
-  updated_at?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   category: string;
   description: string;
   value: number;
