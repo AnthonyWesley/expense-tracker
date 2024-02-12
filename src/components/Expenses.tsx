@@ -1,50 +1,3 @@
-// import { useAppManager } from "../context/AppManagerContext";
-// import { categories } from "../data/categories";
-// import { getAllSunForCategories } from "../helpers/others";
-// //@ts-ignore
-// import CanvasJSReact from "@canvasjs/react-charts";
-
-// export default function Expenses() {
-//   const { filteredList } = useAppManager();
-
-//   var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-//   const dataRecord = getAllSunForCategories(filteredList).expenseList.map(
-//     (record) => ({
-//       y: record.totalValue,
-//       label: categories[record.category]?.title,
-//       color: record.color,
-//     })
-//   );
-
-//   const options = {
-//     animationEnabled: true,
-//     backgroundColor: "#1f2937",
-//     // exportFileName: "New Year Resolutions",
-//     // exportEnabled: true,
-//     showInLegend: true,
-//     height: 340,
-//     data: [
-//       {
-//         radius: "60%",
-//         type: "pie",
-//         startAngle: 0,
-//         indexLabelFontColor: "white",
-//         //innerRadius: 60,
-//         indexLabelFontSize: 13,
-//         indexLabel: "{label} - #percent%",
-//         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
-//         dataPoints: dataRecord,
-//       },
-//     ],
-//   };
-//   return (
-//     <section className="w-full bg-appSecondaryColor rounded-md col-span-1 h-[350px] overflow-hidden">
-//       <div className="text-center p-4">GRÁFICO DE DESPESAS</div>
-//       <CanvasJSChart options={options} />
-//     </section>
-//   );
-// }
-
 import ReactApexChart from "react-apexcharts";
 import { categories } from "../data/categories";
 import { formattedCurrency, getAllSunForCategories } from "../helpers/others";
@@ -93,7 +46,7 @@ export default function Expenses() {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200,
+              width: 350,
             },
           },
         },
@@ -101,15 +54,24 @@ export default function Expenses() {
     },
   };
 
+  const isList = filteredList.length > 0;
+
   return (
-    <section className="w-full flex flex-col items-center bg-appSecondaryColor rounded-md col-span-1 h-[350px] overflow-hidden">
+    <section
+      className={`w-full flex flex-col items-center bg-appSecondaryColor rounded-md col-span-1 overflow-hidden ${
+        isList ? "h-[350px]" : ""
+      }`}
+    >
       <div className="text-center p-4">GRÁFICO DE DESPESAS</div>
-      <ReactApexChart
-        options={state.options as any}
-        series={state.series}
-        type="pie"
-        width={350}
-      />
+
+      {isList && (
+        <ReactApexChart
+          options={state.options as any}
+          series={state.series}
+          type="pie"
+          width={350}
+        />
+      )}
     </section>
   );
 }

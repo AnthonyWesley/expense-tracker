@@ -33,7 +33,9 @@ export default function HeaderNavigation() {
         >
           <ChevronLeft />
         </div>
-        <div>{dateHelpers.formatCurrentMonth(currentMonth).toUpperCase()}</div>
+        <div className="w-72 flex justify-center">
+          {dateHelpers.formatCurrentMonth(currentMonth).toUpperCase()}
+        </div>
         <div
           onClick={nextMonth}
           className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-4 rounded-sm"
