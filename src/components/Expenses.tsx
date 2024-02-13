@@ -58,9 +58,8 @@ export default function Expenses() {
 
   return (
     <section
-      className={`w-full flex flex-col items-center bg-appSecondaryColor rounded-md col-span-1 overflow-hidden ${
-        isList ? "h-[350px]" : ""
-      }`}
+      className={`w-full flex flex-col items-center bg-appSecondaryColor rounded-md col-span-1
+      `}
     >
       <div className="text-center p-4">GRÁFICO DE DESPESAS</div>
 

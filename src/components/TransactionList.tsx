@@ -5,21 +5,55 @@ import { formattedText, formattedCurrency } from "../helpers/others";
 import { useAppManager } from "../context/AppManagerContext";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
+import G_Select from "./generics/G_Select";
+import { useState } from "react";
+import { RecordType } from "../type/RecordType";
 
-export function TransactionList() {
+export function TransactionList({ className }: { className?: string }) {
   const { filteredList } = useAppManager();
   const navigate = useNavigate();
   const isList = filteredList.length > 0;
+  const [newList, setNewList] = useState<RecordType[]>();
+  const opList = ["TODOS", "RECEITAS", "DESPESAS"];
+
+  const selectList = (option: string) => {
+    console.log("carregou");
+
+    if (option === "TODOS") {
+      setNewList(filteredList);
+    }
+    if (option === "RECEITAS") {
+      const allIncome = filteredList.filter(
+        (list) => !categories[list?.category].expense
+      );
+      setNewList(allIncome);
+    }
+    if (option === "DESPESAS") {
+      const allExpenses = filteredList.filter(
+        (list) => categories[list?.category].expense
+      );
+      setNewList(allExpenses);
+    }
+  };
+
   return (
     <section
-      className={`w-full mb-16 bg-appSecondaryColor rounded-md col-span-2 overflow-hidden ${
-        isList ? "h-[350px]" : ""
+      className={` w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
+        className ? className : "col-span-3"
       }`}
     >
-      <div className="text-center p-4">MOVIMENTAÇÕES</div>
+      <header className="flex items-center justify-between">
+        <div className="text-center p-4 lg:flex-1">MOVIMENTAÇÕES</div>
+
+        <G_Select optionList={opList} onSelect={selectList} />
+      </header>
 
       {isList && (
-        <div className="h-[290px] overflow-y-scroll">
+        <div
+          className={`${
+            className ? className : "h-[290px]"
+          } overflow-y-scroll `}
+        >
           <table className="min-w-full bg-transparent border border-white/10">
             <thead>
               <tr>
@@ -31,13 +65,13 @@ export function TransactionList() {
               </tr>
             </thead>
             <tbody>
-              {filteredList.map((invoice, index) => (
+              {(newList ?? filteredList)?.map((invoice, index) => (
                 <tr
                   key={index}
                   onClick={() => navigate(`/record/${invoice.id}`)}
                   className="cursor-pointer bg-appSecondaryColor border border-white/10 hover:bg-appPrimaryColor "
                 >
-                  <td className="py-2 px-4  ">
+                  <td className="py-2 px-4">
                     {(categories[invoice.category]?.expense && (
                       <ArrowUpFromLine color="red" />
                     )) || <ArrowDownFromLine color="green" />}
