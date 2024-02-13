@@ -1,7 +1,6 @@
 import { ArrowUpFromLine, ArrowDownFromLine } from "lucide-react";
 import { categories } from "../data/categories";
 import { formattedText, formattedCurrency } from "../helpers/others";
-
 import { useAppManager } from "../context/AppManagerContext";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
@@ -12,96 +11,84 @@ import { RecordType } from "../type/RecordType";
 export function TransactionList({ className }: { className?: string }) {
   const { filteredList } = useAppManager();
   const navigate = useNavigate();
-  const isList = filteredList.length > 0;
   const [newList, setNewList] = useState<RecordType[]>();
-  const opList = ["TODOS", "RECEITAS", "DESPESAS"];
+  const optionList = ["TODOS", "RECEITAS", "DESPESAS"];
 
   const selectList = (option: string) => {
-    console.log("carregou");
-
-    if (option === "TODOS") {
-      setNewList(filteredList);
-    }
-    if (option === "RECEITAS") {
-      const allIncome = filteredList.filter(
-        (list) => !categories[list?.category].expense
-      );
-      setNewList(allIncome);
-    }
-    if (option === "DESPESAS") {
-      const allExpenses = filteredList.filter(
-        (list) => categories[list?.category].expense
-      );
-      setNewList(allExpenses);
+    switch (option) {
+      case "TODOS":
+        setNewList(filteredList);
+        break;
+      case "RECEITAS":
+        setNewList(
+          filteredList.filter((item) => !categories[item?.category]?.expense)
+        );
+        break;
+      case "DESPESAS":
+        setNewList(
+          filteredList.filter((item) => categories[item?.category]?.expense)
+        );
+        break;
+      default:
+        break;
     }
   };
 
+  const renderTableRow = (invoice: RecordType, index: number) => (
+    <tr
+      key={index}
+      onClick={() => navigate(`/record/${invoice.id}`)}
+      className="cursor-pointer bg-appSecondaryColor border border-white/10 hover:bg-appPrimaryColor"
+    >
+      <td className="py-2 px-4">
+        {categories[invoice.category]?.expense ? (
+          <ArrowUpFromLine color="red" />
+        ) : (
+          <ArrowDownFromLine color="green" />
+        )}
+      </td>
+      <td
+        className="py-2 px-4"
+        style={{ backgroundColor: categories[invoice.category]?.color }}
+      >
+        {categories[invoice.category]?.title}
+      </td>
+      <td className="py-2 px-4">{formattedText(invoice.description)}</td>
+      <td
+        style={{
+          color: categories[invoice.category]?.expense ? "red" : "green",
+        }}
+      >
+        {formattedCurrency(invoice.value)}
+      </td>
+      <td className="py-2 px-4">{dateHelpers.formatDate(invoice.date)}</td>
+    </tr>
+  );
+
   return (
     <section
-      className={` w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
-        className ? className : "col-span-3"
+      className={`w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
+        className || "col-span-3"
       }`}
     >
       <header className="flex items-center justify-between">
         <div className="text-center p-4 lg:flex-1">MOVIMENTAÇÕES</div>
-
-        <G_Select optionList={opList} onSelect={selectList} />
+        <G_Select optionList={optionList} onSelect={selectList} />
       </header>
 
-      {isList && (
-        <div
-          className={`${
-            className ? className : "h-[290px]"
-          } overflow-y-scroll `}
-        >
+      {filteredList.length > 0 && (
+        <div className={`${className || "h-[290px]"} overflow-y-scroll`}>
           <table className="min-w-full bg-transparent border border-white/10">
             <thead>
               <tr>
                 <th className="text-left py-2 px-4 w-[50px]">TIPO</th>
                 <th className="text-left py-2 px-4 w-[100px]">CATEGORIA</th>
-                <th className="text-left py-2 px-4 ">DESCRIÇÃO</th>
+                <th className="text-left py-2 px-4">DESCRIÇÃO</th>
                 <th className="text-left py-2 px-4 w-[100px]">VALOR</th>
                 <th className="text-left py-2 px-4 w-[100px]">DATA</th>
               </tr>
             </thead>
-            <tbody>
-              {(newList ?? filteredList)?.map((invoice, index) => (
-                <tr
-                  key={index}
-                  onClick={() => navigate(`/record/${invoice.id}`)}
-                  className="cursor-pointer bg-appSecondaryColor border border-white/10 hover:bg-appPrimaryColor "
-                >
-                  <td className="py-2 px-4">
-                    {(categories[invoice.category]?.expense && (
-                      <ArrowUpFromLine color="red" />
-                    )) || <ArrowDownFromLine color="green" />}
-                  </td>
-                  <td
-                    className="py-2 px-4 "
-                    style={{
-                      backgroundColor: categories[invoice.category]?.color,
-                    }}
-                  >
-                    {categories[invoice.category]?.title}
-                  </td>
-                  <td className="py-2 px-4 ">
-                    {formattedText(invoice.description)}
-                  </td>
-                  <td
-                    style={{
-                      color: categories[invoice.category]?.expense
-                        ? "red"
-                        : "green",
-                    }}
-                  >
-                    {formattedCurrency(invoice.value)}
-                  </td>
-                  <td className="py-2 px-4 ">
-                    {dateHelpers.formatDate(invoice.date)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            <tbody>{(newList ?? filteredList)?.map(renderTableRow)}</tbody>
           </table>
         </div>
       )}
