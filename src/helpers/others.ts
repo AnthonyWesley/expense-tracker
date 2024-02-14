@@ -1,4 +1,6 @@
+import { ErrorObject } from "../components/Toast";
 import { categories } from "../data/categories";
+import { CategoriesType } from "../type/CategoriesType";
 import { RecordType } from "../type/RecordType";
 
 export const formattedCurrency = (currency: number): string => {
@@ -81,28 +83,39 @@ export const getAllSunForCategories = (list: RecordType[]) => {
     });
   }
 
-  // const validateForm = (date, category, description, value) => {
-  //   const errors = [];
-
-  //   if (!description || description.trim() === "") {
-  //     errors.push("A descrição é obrigatória");
-  //   }
-
-  //   if (!category || category.trim() === "") {
-  //     errors.push("A categoria é obrigatória");
-  //   }
-
-  //   if (!value || isNaN(value) || value <= 0) {
-  //     errors.push("O valor deve ser um número positivo");
-  //   }
-
-  //   const regexDate = /^\d{4}-\d{2}-\d{2}$/;
-  //   if (!date || !regexDate.test(date)) {
-  //     errors.push("A data é inválida. Use o formato DD-MM-YYYY");
-  //   }
-
-  //   return errors;
-  // };
-
   return { expenseList, incomeList };
+};
+export const categorizeCategories = (cat: CategoriesType) => {
+  const incomeKeys: string[] = [];
+  const expenseKeys: string[] = [];
+
+  for (const key in cat) {
+    const category = cat[key];
+    if (category?.expense) {
+      expenseKeys.push(key);
+    } else {
+      incomeKeys.push(key);
+    }
+  }
+  return { incomeKeys, expenseKeys };
+};
+
+interface Record {
+  date: string;
+  category: string;
+  value: string;
+  description: string;
+}
+export const validateFields = ({
+  date,
+  category,
+  value,
+  description,
+}: Record) => {
+  const newErrors: ErrorObject = {};
+  if (!date) newErrors.errorDate = "DATA INVÁLIDA";
+  if (!category) newErrors.errorCategory = "CATEGORIA INVÁLIDA";
+  if (!Number(value)) newErrors.errorValue = "VALOR INVÁLIDO";
+  if (description.length < 4) newErrors.errorDescription = "DESCRIÇÃO INVÁLIDA";
+  return newErrors;
 };

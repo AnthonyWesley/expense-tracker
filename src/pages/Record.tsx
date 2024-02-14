@@ -37,8 +37,6 @@ export default function Record() {
     return [];
   }
 
-  console.log(listId.updatedAt);
-
   return (
     <div className="container mx-auto rounded-lg my-20 p-4 bg-white">
       <div className="space-y-1">
