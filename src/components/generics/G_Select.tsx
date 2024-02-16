@@ -12,44 +12,56 @@ export default function G_Select({
   optionList,
   format,
 }: GSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
     onSelect(option);
+    setIsOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <div
-      className={`z-20 flex items-center justify-between bg-gray-800 ${
-        format ? "w-full" : "w-36 lg:w-44"
-      }`}
+      className={`z-20 flex items-center justify-between bg-gray-800 border rounded-md ${
+        selectedOption ? "border-white" : "border-white/10 "
+      } ${format ? "w-full" : "w-36 lg:w-44"}`}
     >
-      <div className="group relative cursor-pointer w-full">
-        <div className="flex items-center justify-between px-4 w-full">
-          <span className="menu-hover my-2 py-2 font-medium text-white">
-            {!selectedOption ? optionList[0] : selectedOption}
+      <div className="relative w-full">
+        <div
+          className="flex items-center justify-between w-full cursor-pointer"
+          onClick={toggleDropdown}
+        >
+          <span className="p-6 menu-hover font-medium text-white">
+            {selectedOption
+              ? selectedOption
+              : format
+              ? "CATEGORIA"
+              : optionList[0]}
           </span>
-          <ChevronDown className="ml-auto" />
+
+          <ChevronDown className="mr-4" />
         </div>
 
-        <div
-          className={`text-xs invisible absolute flex flex-col bg-gray-900 text-gray-800 shadow-xl group-hover:visible ${
-            format ? "left-32 top-2" : "left-0 w-full"
-          }`}
-        >
-          {optionList?.map((option, index) => (
-            <div
-              key={index}
-              className={`p-3 block font-semibold text-gray-100 hover:bg-gray-800 ${
-                selectedOption === option ? "bg-gray-900" : ""
-              }`}
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </div>
-          ))}
-        </div>
+        {isOpen && (
+          <div className="w-full h-[230px] rounded-md overflow-auto text-xs absolute top-full mt-1 bg-gray-700 text-gray-800 shadow-xl">
+            {optionList?.map((option, index) => (
+              <div
+                key={index}
+                className={`p-6 border border-gray-900/20 block font-semibold text-gray-100 hover:bg-gray-600 ${
+                  selectedOption === option ? "bg-gray-600" : ""
+                }`}
+                onClick={() => handleOptionClick(option)}
+              >
+                {option}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

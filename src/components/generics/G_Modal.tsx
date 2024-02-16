@@ -9,7 +9,6 @@ import {
 import { categories } from "../../data/categories";
 import { useRecordStore } from "../../store/useRecordStore";
 import G_InputArea from "./G_InputArea";
-import { ClipboardList } from "lucide-react";
 import { ErrorObject, Toast } from "../Toast";
 import G_Button from "./G_Button";
 import G_Select from "./G_Select";
@@ -123,19 +122,22 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
               value={date || dateHelpers.initialDate()}
               onChange={(e) => updateDate(e.target.value)}
             />
-            <div className="flex items-center py-2 px-4 border border-white/15 rounded-md">
-              <ClipboardList className="opacity-35" />
 
+            {change && (
               <G_Select
                 format={true}
                 onSelect={selectList}
-                optionList={
-                  change
-                    ? incomeKeys.map((item) => categories[item].title)
-                    : expenseKeys.map((item) => categories[item].title)
-                }
+                optionList={incomeKeys.map((item) => categories[item].title)}
               />
-            </div>
+            )}
+            {!change && (
+              <G_Select
+                format={true}
+                onSelect={selectList}
+                optionList={expenseKeys.map((item) => categories[item].title)}
+              />
+            )}
+
             <G_InputArea
               name="VALOR"
               type="number"

@@ -18,7 +18,7 @@ const G_Header: React.FC<G_HeaderProps> = ({
   return (
     <header className="flex flex-col justify-between bg-gray-900  rounded-sm">
       {title && (
-        <div className="flex justify-center p-2 items-center">
+        <div className="flex justify-center items-center">
           <span className="px-2"> </span>
           <h1 className="text-lg">{title}</h1>
         </div>
