@@ -21,7 +21,7 @@ export default function ApiProvider({
   async function registerUser(user: UserType) {
     try {
       const response = await axios.post(
-        "https://expense-tracker-api-e91c.onrender.com/register",
+        "https://expense-tracker-api-k7ih.onrender.com/register",
         user,
         {
           headers: { "Content-Type": "application/json" },
@@ -37,7 +37,7 @@ export default function ApiProvider({
   async function loginUser(user: UserType) {
     try {
       const response = await axios.post(
-        "https://expense-tracker-api-e91c.onrender.com/login",
+        "https://expense-tracker-api-k7ih.onrender.com/login",
         user,
         {
           headers: { "Content-Type": "application/json" },
@@ -104,7 +104,7 @@ export default function ApiProvider({
   async function apiUpdateRecord(id: string, updatedItem: RecordType) {
     try {
       const response = await axiosInstance.put(
-        `https://expense-tracker-api-e91c.onrender.com/record/${id}`,
+        `https://expense-tracker-api-k7ih.onrender.com/record/${id}`,
         updatedItem
       );
       if (response) {
@@ -119,7 +119,7 @@ export default function ApiProvider({
   async function apiDeleteRecord(id: string) {
     try {
       const response = await axiosInstance.delete(
-        `https://expense-tracker-api-e91c.onrender.com/record/${id}`
+        `https://expense-tracker-api-k7ih.onrender.com/record/${id}`
       );
 
       if (response) {
