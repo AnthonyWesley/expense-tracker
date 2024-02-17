@@ -21,7 +21,7 @@ export default function G_InputArea({
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       className={`w-full text-white p-2 rounded-md border  ${
-        focus ? "border-white" : "border-white/10 "
+        focus || value ? "border-white" : "border-white/10 "
       } `}
     >
       <label htmlFor={name} className="block text-sm font-medium opacity-50">

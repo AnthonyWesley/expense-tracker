@@ -110,7 +110,6 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
           <G_Header
             change={change}
             setChange={setChange}
-            title="REGISTRO"
             subtitleOne={"ENTRADAS"}
             subtitleTwo={"SAIDAS"}
           />
