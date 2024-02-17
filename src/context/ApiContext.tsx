@@ -65,6 +65,8 @@ export default function ApiProvider({
 
       return response.data.user;
     } catch (error: any) {
+      window.alert("Email/Senha Inválido!");
+      window.location.href = "/login";
       return console.error("Erro ao logar com uruário:", error.message);
     }
   }
