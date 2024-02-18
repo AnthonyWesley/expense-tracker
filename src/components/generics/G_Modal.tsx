@@ -155,7 +155,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
           <footer className="flex gap-1 justify-end py-2 px-4">
             <G_Button
               onClick={handleSubmit}
-              className=" bg-cyan-500 text-white py-2 px-4 rounded-sm hover:bg-cyan-600"
+              className=" bg-blue-900 text-white py-3 px-4 rounded-sm hover:bg-blue-800"
             >
               REGISTRAR
             </G_Button>

@@ -29,7 +29,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full items-center justify-center text-blue-800">
+    <div className="flex flex-col gap-3 w-full items-center justify-center text-blue-800">
       <G_InputArea
         name="Email"
         type="email"
@@ -49,7 +49,7 @@ export const Login = () => {
         icon={<LockKeyhole />}
       />
       <G_Button
-        className="w-full text-center flex justify-center bg-blue-500 text-white p-2 rounded-md hover:bg-blue-800"
+        className="w-full text-center flex justify-center bg-blue-800 text-white py-4 p-2 mb-2 rounded-md hover:bg-blue-800"
         onClick={handleLogin}
       >
         LOGIN
