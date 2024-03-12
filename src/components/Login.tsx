@@ -11,8 +11,8 @@ export const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   const handleLogin = async () => {
-    setLoading(true);
-    if (credentials.email) {
+    if (credentials.email && credentials.password) {
+      setLoading(true);
       try {
         const user = await loginUser({
           email: credentials.email,
@@ -25,6 +25,9 @@ export const Login = () => {
       } catch (error) {
         console.error("Erro durante o login:", error);
       }
+    } else {
+      alert("Insira Email/Senha correta");
+      return;
     }
   };
 
@@ -33,6 +36,7 @@ export const Login = () => {
       <G_InputArea
         name="Email"
         type="email"
+        placeholder="john@doe.com"
         value={credentials.email}
         onChange={(e) =>
           setCredentials({ ...credentials, email: e.target.value })
@@ -42,6 +46,7 @@ export const Login = () => {
       <G_InputArea
         name="Password"
         type="password"
+        placeholder="123"
         value={credentials.password}
         onChange={(e) =>
           setCredentials({ ...credentials, password: e.target.value })

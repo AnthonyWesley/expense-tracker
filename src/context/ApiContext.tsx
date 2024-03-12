@@ -50,6 +50,7 @@ export default function ApiProvider({
           headers: { "Content-Type": "application/json" },
         }
       );
+      console.log(response);
 
       if (response) {
         localStorage.setItem("authTokens", JSON.stringify(response.data));

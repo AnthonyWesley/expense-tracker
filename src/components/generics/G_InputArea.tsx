@@ -20,7 +20,7 @@ export default function G_InputArea({
     <div
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
-      className={`w-full text-white p-2 rounded-md border  ${
+      className={`w-full text-white p-2 rounded-md border ${
         focus || value ? "border-white" : "border-white/10 "
       } `}
     >
@@ -46,7 +46,7 @@ export default function G_InputArea({
           <input
             id={name}
             name={name}
-            className="p-2 w-full rounded-sm outline-none bg-transparent no-spin-arrows"
+            className="p-2 w-full rounded-sm outline-none bg-transparent no-spin-arrows custom-placeholder"
             value={value}
             {...rest}
           />

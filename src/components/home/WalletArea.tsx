@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useAppManager } from "../context/AppManagerContext";
-import { formattedCurrency } from "../helpers/others";
-import Chip from "./Chip";
-import Logo from "./Logo";
+import { useAppManager } from "../../context/AppManagerContext";
+import { formattedCurrency } from "../../helpers/others";
+import Chip from "../Chip";
+import G_Logo from "../generics/G_Logo";
 import { EyeOff, Eye } from "lucide-react";
-import { useApiContext } from "../context/ApiContext";
+import { useApiContext } from "../../context/ApiContext";
 
 export default function WalletArea() {
   const { walletBalance } = useAppManager();
@@ -13,7 +13,7 @@ export default function WalletArea() {
 
   return (
     <section className="w-full p-4 bg-appSecondaryColor/70 text-gray-50 rounded-lg flex flex-col col-span-1 gap-2 justify-between items-center text-sm lg:text-xl shadow-[0px_0px_0px_1px_rgba(0,0,0,0.10)]">
-      <Logo />
+      <G_Logo />
 
       <div className="self-start ml-4">
         <Chip />

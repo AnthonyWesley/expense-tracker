@@ -17,6 +17,6 @@ export const categories: CategoriesType = {
   entertainment: { title: "ENTRETENIMENTO", color: "#f59e0b", expense: true },
   tithe: { title: "DÍZIMO", color: "#0ea5e9", expense: true },
   investments: { title: "INVESTIMENTOS", color: "#059669", expense: true },
-  household: { title: "CASA", color: "#e11d48", expense: true },
+  household: { title: "CASA", color: "#86198f", expense: true },
   otherExpense: { title: "OUTRAS DESPESAS", color: "#134e4a", expense: true },
 };

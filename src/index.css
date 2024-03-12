@@ -25,3 +25,8 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.custom-placeholder::placeholder {
+  opacity: 0.3;
+  font-style: italic;
+}

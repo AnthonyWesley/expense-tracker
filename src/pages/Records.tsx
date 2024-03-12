@@ -1,4 +1,4 @@
-import { TransactionList } from "../components/TransactionList";
+import { TransactionList } from "../components/home/TransactionList";
 
 export default function Records() {
   return (

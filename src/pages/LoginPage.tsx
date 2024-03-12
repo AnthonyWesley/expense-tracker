@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Register } from "../components/Register";
 import { Login } from "../components/Login";
-import Logo from "../components/Logo";
+
 import G_Header from "../components/generics/G_Header";
+import G_Logo from "../components/generics/G_Logo";
 
 export default function LoginPage() {
   const [change, setChange] = useState(true);
@@ -10,7 +11,7 @@ export default function LoginPage() {
   return (
     <section className="container mx-auto mt-7 lg:w-[500px] bg-appSecondaryColor text-blue-500 shadow-md rounded-md p-4">
       <div className="px-2">
-        <Logo />
+        <G_Logo />
       </div>
 
       <G_Header

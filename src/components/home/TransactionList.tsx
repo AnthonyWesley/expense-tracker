@@ -1,30 +1,37 @@
 import { ArrowUpFromLine, ArrowDownFromLine } from "lucide-react";
-import { categories } from "../data/categories";
-import { formattedText, formattedCurrency } from "../helpers/others";
-import { useAppManager } from "../context/AppManagerContext";
-import { dateHelpers } from "../helpers/DateHelpers";
+import { categories } from "../../data/categories";
+import { formattedText, formattedCurrency } from "../../helpers/others";
+import { useAppManager } from "../../context/AppManagerContext";
+import { dateHelpers } from "../../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
-import G_Select from "./generics/G_Select";
+import G_Select from "../generics/G_Select";
 import { useState } from "react";
-import { RecordType } from "../type/RecordType";
+import { RecordType } from "../../type/RecordType";
+import { useSearchParams } from "react-router-dom";
 
 export function TransactionList({ className }: { className?: string }) {
   const { filteredList } = useAppManager();
   const navigate = useNavigate();
   const [newList, setNewList] = useState<RecordType[]>();
   const optionList = ["TODOS", "RECEITAS", "DESPESAS"];
+  const [_, setSearchParams] = useSearchParams();
 
   const selectList = (option: string) => {
     switch (option) {
       case "TODOS":
+        setSearchParams({ option: "TODOS" });
         setNewList(filteredList);
         break;
       case "RECEITAS":
+        setSearchParams({ option: "RECEITAS" });
+
         setNewList(
           filteredList.filter((item) => !categories[item?.category]?.expense)
         );
         break;
       case "DESPESAS":
+        setSearchParams({ option: "DESPESAS" });
+
         setNewList(
           filteredList.filter((item) => categories[item?.category]?.expense)
         );
@@ -68,7 +75,7 @@ export function TransactionList({ className }: { className?: string }) {
   return (
     <section
       className={`w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
-        className || "col-span-3"
+        className || "col-span-2"
       }`}
     >
       <header className="flex items-center justify-between">

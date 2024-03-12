@@ -1,4 +1,4 @@
-export default function Logo() {
+export default function G_Logo() {
   return (
     <div className="w-full flex items-center text-sm lg:text-xl gap-2 self-end">
       <span className="w-full lg:h-5 h-3 bg-blue-900"></span>

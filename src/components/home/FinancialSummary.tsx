@@ -1,10 +1,10 @@
 import { Plus } from "lucide-react";
-import { formattedCurrency } from "../helpers/others";
-import { useAppManager } from "../context/AppManagerContext";
-import G_Modal from "./generics/G_Modal";
-import { useRecordStore } from "../store/useRecordStore";
-import { dateHelpers } from "../helpers/DateHelpers";
-import { useApiContext } from "../context/ApiContext";
+import { formattedCurrency } from "../../helpers/others";
+import { useAppManager } from "../../context/AppManagerContext";
+import G_Modal from "../generics/G_Modal";
+import { useRecordStore } from "../../store/useRecordStore";
+import { dateHelpers } from "../../helpers/DateHelpers";
+import { useApiContext } from "../../context/ApiContext";
 
 export default function FinancialSummary() {
   const { income, expense } = useAppManager();
