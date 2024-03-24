@@ -4,14 +4,14 @@ import App from "./App.tsx";
 import "./index.css";
 
 import ApiProvider from "./context/ApiContext.tsx";
-import AppManagerContext from "./context/AppManagerContext.tsx";
+import AppManager from "./context/AppManager.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApiProvider>
-      <AppManagerContext>
+      <AppManager>
         <App />
-      </AppManagerContext>
+      </AppManager>
     </ApiProvider>
   </React.StrictMode>
 );

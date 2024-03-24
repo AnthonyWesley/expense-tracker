@@ -1,9 +1,10 @@
-import { Text } from "lucide-react";
+import { Icon } from "@iconify/react/dist/iconify.js";
+
 import { InputHTMLAttributes, useState } from "react";
 
 interface G_InputAreaProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-  name: string;
+  name?: string;
   rows?: number;
   icon?: string | JSX.Element;
 }
@@ -21,16 +22,21 @@ export default function G_InputArea({
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       className={`w-full text-white p-2 rounded-md border ${
-        focus || value ? "border-white" : "border-white/10 "
+        focus || value ? " border-blue-600" : "border-white/10 "
       } `}
     >
-      <label htmlFor={name} className="block text-sm font-medium opacity-50">
-        {name}
-      </label>
+      {name && (
+        <label
+          htmlFor={name}
+          className="text-left block text-sm font-medium opacity-20"
+        >
+          {name}
+        </label>
+      )}
 
       {rows ? (
         <div className="flex items-end">
-          <Text />
+          <Icon icon="line-md:text-box-multiple" />
           <textarea
             id={name}
             name={name}

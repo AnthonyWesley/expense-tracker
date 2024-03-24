@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useAppManager } from "../../context/AppManagerContext";
+import { useAppManager } from "../../context/AppManager";
 import { formattedCurrency } from "../../helpers/others";
 import Chip from "../Chip";
 import G_Logo from "../generics/G_Logo";
-import { EyeOff, Eye } from "lucide-react";
 import { useApiContext } from "../../context/ApiContext";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function WalletArea() {
   const { walletBalance } = useAppManager();
@@ -23,10 +23,19 @@ export default function WalletArea() {
         <h1 className="text-sm text-gray-600">Saldo em conta</h1>
         <div className="font-bold flex items-center gap-2 rounded-md text-blue-800">
           {!visibility && (
-            <EyeOff size={30} onClick={() => setVisibility(true)} />
+            <Icon
+              icon="bi:eye-fill"
+              width={30}
+              onClick={() => setVisibility(true)}
+            />
           )}
 
-          {visibility && <Eye size={30} onClick={() => setVisibility(false)} />}
+          {visibility && (
+            <Icon
+              icon="bi:eye-slash-fill"
+              onClick={() => setVisibility(false)}
+            />
+          )}
           {visibility && formattedCurrency(walletBalance)}
         </div>
       </footer>

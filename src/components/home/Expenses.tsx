@@ -1,14 +1,13 @@
 import ReactApexChart from "react-apexcharts";
-import { categories } from "../../data/categories";
-import {
-  formattedCurrency,
-  getAllSunForCategories,
-} from "../../helpers/others";
-import { useAppManager } from "../../context/AppManagerContext";
+import { formattedCurrency } from "../../helpers/others";
+import { useAppManager } from "../../context/AppManager";
 import { useSearchParams } from "react-router-dom";
+import { useApiContext } from "../../context/ApiContext";
 
 export default function Expenses() {
-  const { filteredList, income, expense } = useAppManager();
+  const { filteredList, income, expense, calculateTotalsByCategory } =
+    useAppManager();
+  const { categories } = useApiContext();
   const [searchParams] = useSearchParams();
   const option = searchParams.get("option");
 
@@ -29,9 +28,9 @@ export default function Expenses() {
 
   const getListForOptions =
     option === "RECEITAS"
-      ? getAllSunForCategories(filteredList).incomeList
+      ? calculateTotalsByCategory(filteredList).incomeList
       : option === "DESPESAS"
-      ? getAllSunForCategories(filteredList).expenseList
+      ? calculateTotalsByCategory(filteredList).expenseList
       : allRecords;
 
   const dataRecord = getListForOptions.map((record) => ({

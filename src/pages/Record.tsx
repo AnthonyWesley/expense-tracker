@@ -1,36 +1,28 @@
-import { ArrowUpFromLine, ArrowDownFromLine } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApiContext } from "../context/ApiContext";
-import { categories } from "../data/categories";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { findItemByParams, formattedCurrency } from "../helpers/others";
 import { useRecordStore } from "../store/useRecordStore";
 import { useState } from "react";
 import G_Button from "../components/generics/G_Button";
 import G_Modal from "../components/generics/G_Modal";
-import G_Alert from "../components/generics/G_Alert";
+import G_Confirm from "../components/generics/G_Confirm";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Record() {
   const { id } = useParams() as { id: string };
-  const { list, apiDeleteRecord, apiUpdateRecord } = useApiContext();
+  const { list, apiDeleteRecord, apiUpdateRecord, categories } =
+    useApiContext();
   const { category, date, description, value } = useRecordStore();
   const navigate = useNavigate();
-
   const listId = findItemByParams(list, id);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
-  const openAlert = () => {
-    setIsAlertOpen(true);
-  };
-
-  const closeAlert = () => {
-    setIsAlertOpen(false);
-  };
-
-  const deleteRecord = async () => {
-    await apiDeleteRecord(id);
-
-    navigate("/");
+  const onConfirm = async (confirm: boolean) => {
+    if (confirm) {
+      await apiDeleteRecord(id);
+      navigate("/");
+    }
   };
 
   if (listId === undefined) {
@@ -58,8 +50,10 @@ export default function Record() {
       <div className="flex h-5 items-center space-x-4 text-sm text-appPrimaryColor">
         <div>
           {(categories[listId?.category]?.expense && (
-            <ArrowUpFromLine color="red" />
-          )) || <ArrowDownFromLine color="green" />}
+            <Icon icon="pepicons-print:triangle-down" color="red" width={30} />
+          )) || (
+            <Icon icon="pepicons-print:triangle-up" color="green" width={30} />
+          )}
         </div>
         <hr />
         <div>{formattedCurrency(listId?.value)}</div>
@@ -94,19 +88,20 @@ export default function Record() {
               }),
           }}
         />
-        ,
+
         <hr />
-        <G_Button onClick={openAlert} className="bg-red-600 p-4">
+        <G_Button
+          onClick={() => setIsAlertOpen(true)}
+          className="bg-red-600 p-4"
+        >
           DELETAR
         </G_Button>
       </div>
-      <G_Alert
+      <G_Confirm
         description="Deseja deletar o registro?"
         isOpen={isAlertOpen}
-        onClose={closeAlert}
-        functionProp={{
-          action: deleteRecord,
-        }}
+        onClose={() => setIsAlertOpen(false)}
+        onConfirm={onConfirm}
       />
     </div>
   );

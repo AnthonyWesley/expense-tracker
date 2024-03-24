@@ -1,10 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { RecordType } from "../type/RecordType";
 import { UserType } from "../type/UserType";
-import { ApiContextType } from "../type/ApiContextType";
+
 import useAxios from "../hooks/useAxios";
 import RecordApi from "../api/RecordApi";
 import UserApi from "../api/UserApi";
+import CategoryApi from "../api/CategoryApi";
+import { CategoriesType, CategoryApiType } from "../type/CategoryType";
+import { ApiContextType } from "../type/ApiContextType";
 
 export type TokenType = { accessToken: string; refreshToken: string };
 
@@ -17,9 +20,11 @@ export default function ApiProvider({
 }) {
   const [dataUser, setDataUser] = useState<UserType | undefined>();
   const { setAuthTokens, axiosInstance, loading, setLoading } = useAxios();
-  const recordApi = new RecordApi(axiosInstance);
-  const userApi = new UserApi();
   const [list, setList] = useState<RecordType[]>([]);
+  const [categories, setCategories] = useState<CategoriesType>({});
+  const userApi = new UserApi();
+  const recordApi = new RecordApi(axiosInstance);
+  const categoryApi = new CategoryApi(axiosInstance);
 
   async function registerUser(user: UserType) {
     setLoading(true);
@@ -72,8 +77,54 @@ export default function ApiProvider({
     }
   }
 
+  async function apiUpdateMany(currentName: string, updateName: string) {
+    const response = await recordApi.updateMany(currentName, updateName);
+    if (response) {
+      apiReadRecord();
+      return response;
+    }
+  }
+
+  async function apiCreateCategory(item: CategoryApiType) {
+    const response = await categoryApi.create(item);
+
+    if (response) {
+      apiReadCategory();
+      setCategories(response);
+      return response;
+    }
+  }
+  async function apiReadCategory() {
+    const response = await categoryApi.read();
+
+    if (response) {
+      setCategories(response);
+
+      return response;
+    }
+  }
+
+  async function apiDeleteCategory(id: string) {
+    const response = await categoryApi.delete(id);
+    if (response) {
+      apiReadCategory();
+      return response;
+    }
+  }
+
+  async function apiUpdateCategory(id: string, updatedItem: CategoryApiType) {
+    const response = await categoryApi.update(id, updatedItem);
+    if (response) {
+      apiReadCategory();
+      return response;
+    }
+  }
+
   useEffect(() => {
-    if (dataUser?.name) apiReadRecord();
+    if (dataUser?.name) {
+      apiReadRecord();
+      apiReadCategory();
+    }
   }, [dataUser?.name]);
 
   useEffect(() => {
@@ -93,12 +144,22 @@ export default function ApiProvider({
         setDataUser,
         list,
         dataUser,
+
         loginUser,
         registerUser,
+
         apiCreateRecord,
         apiReadRecord,
         apiUpdateRecord,
         apiDeleteRecord,
+
+        categories,
+
+        apiCreateCategory,
+        apiDeleteCategory,
+        apiUpdateCategory,
+
+        apiUpdateMany,
       }}
     >
       {children}

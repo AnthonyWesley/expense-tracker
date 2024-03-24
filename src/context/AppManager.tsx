@@ -1,13 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AppManagerContextType } from "../type/AppManagerContextType";
-import { categories } from "../data/categories";
+import { AppManagerContextType } from "../type/AppManagerType";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { RecordType } from "../type/RecordType";
 import { useApiContext } from "./ApiContext";
+import { CategorySummaryType } from "../type/CategoryType";
 
-export const AppManagerContext = createContext<AppManagerContextType | null>(
-  null
-);
+export const AppManager = createContext<AppManagerContextType | null>(null);
 
 export default function AppProvider({
   children,
@@ -21,6 +19,7 @@ export default function AppProvider({
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [walletBalance, setWalletBalance] = useState(0);
+  const { categories } = useApiContext();
 
   const { list } = useApiContext();
 
@@ -58,12 +57,14 @@ export default function AppProvider({
         newIncome += filteredList[i].value;
       }
     }
+
     setIncome(newIncome);
     setExpense(newExpense);
   };
 
   const calculateAllIncome = () => {
     const newList: RecordType[] = [...list];
+
     const expenseItems = newList.filter(
       (item) => categories[item?.category]?.expense
     );
@@ -85,17 +86,78 @@ export default function AppProvider({
     setWalletBalance(totalIncome - totalExpense);
   };
 
+  const calculateTotalsByCategory = (list: RecordType[]) => {
+    let expenseList: CategorySummaryType[] = [];
+    let incomeList: CategorySummaryType[] = [];
+
+    if (list) {
+      list.forEach((item) => {
+        const { category, value, description, date, id } = item;
+
+        if (categories[category]?.expense) {
+          // Expense
+          const existingCategoryIndex = expenseList.findIndex(
+            (c) => c.category === category
+          );
+
+          if (existingCategoryIndex !== -1) {
+            expenseList[existingCategoryIndex].totalValue += value;
+            expenseList[existingCategoryIndex].allDescriptions.push({
+              description,
+              date,
+              value,
+              id,
+              category,
+            });
+          } else {
+            expenseList.push({
+              category,
+              totalValue: value,
+              color: categories[category]?.color,
+              allDescriptions: [{ description, date, value, id, category }],
+            });
+          }
+        } else {
+          // Income
+          const existingCategoryIndex = incomeList.findIndex(
+            (c) => c.category === category
+          );
+
+          if (existingCategoryIndex !== -1) {
+            incomeList[existingCategoryIndex].totalValue += value;
+            incomeList[existingCategoryIndex].allDescriptions.push({
+              description,
+              date,
+              value,
+              id,
+              category,
+            });
+          } else {
+            incomeList.push({
+              category,
+              totalValue: value,
+              color: categories[category]?.color,
+              allDescriptions: [{ description, date, value, id, category }],
+            });
+          }
+        }
+      });
+    }
+
+    return { expenseList, incomeList };
+  };
+
   useEffect(() => {
     calculateMonthlyIncomeAndExpense();
     calculateAllIncome();
-  }, [filteredList]);
+  }, [filteredList, categories]);
 
   useEffect(() => {
     setFilteredList(dateHelpers.filterListByMonth(list, currentMonth));
   }, [list, currentMonth]);
 
   return (
-    <AppManagerContext.Provider
+    <AppManager.Provider
       value={{
         filteredList,
         nextMonth,
@@ -104,18 +166,19 @@ export default function AppProvider({
         income,
         expense,
         walletBalance,
+        calculateTotalsByCategory,
       }}
     >
       {children}
-    </AppManagerContext.Provider>
+    </AppManager.Provider>
   );
 }
 
 export function useAppManager() {
-  const context = useContext(AppManagerContext);
+  const context = useContext(AppManager);
 
   if (!context)
-    throw new Error("AppManagerContext must be used with a contextProvider");
+    throw new Error("AppManager must be used with a contextProvider");
 
   return context;
 }

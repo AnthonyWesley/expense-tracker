@@ -6,15 +6,16 @@ import {
   MouseEventHandler,
   HTMLAttributes,
 } from "react";
-import { categories } from "../../data/categories";
 import { useRecordStore } from "../../store/useRecordStore";
 import G_InputArea from "./G_InputArea";
-import { ErrorObject, Toast } from "../Toast";
 import G_Button from "./G_Button";
 import G_Select from "./G_Select";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { categorizeCategories, validateFields } from "../../helpers/others";
 import G_Header from "./G_Header";
+import { useApiContext } from "../../context/ApiContext";
+
+import { useToastStore } from "./Toast";
 
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   modalName?: string | JSX.Element;
@@ -41,11 +42,13 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [change, setChange] = useState(true);
   const overlay = useRef(null);
-  const [errors, setErrors] = useState<ErrorObject>();
+  const { categories } = useApiContext();
   const { incomeKeys, expenseKeys } = categorizeCategories(categories);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  const { addAlert } = useToastStore();
 
   const clickCloseRef: MouseEventHandler<HTMLElement> = (event) => {
     if (event.target === overlay.current) closeModal();
@@ -54,8 +57,8 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
   const handleSubmit = useCallback(() => {
     const newErrors = validateFields({ date, category, value, description });
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    if (newErrors.length > 0) {
+      addAlert(newErrors);
       return;
     }
 
@@ -66,6 +69,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
       funcThree && funcThree();
     }
     closeModal();
+    addAlert([{ message: "Registro criado com sucesso!", type: "success" }]);
   }, [value, description, date, category, funcActions]);
 
   useEffect(() => {
@@ -78,17 +82,19 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
   }, [modalOpen, change]);
 
   const selectList = (option: string) => {
-    const categoryKeys = Object.keys(categories);
-    const selectedCategoryKey = categoryKeys.find(
-      (key) => categories[key].title.toLowerCase() === option.toLowerCase()
-    );
+    // const categoryKeys = Object.keys(categories);
+    // const selectedCategoryKey = categoryKeys.find(
+    //   (key) => categories[key].title.toLowerCase() === option.toLowerCase()
+    // );
 
-    if (selectedCategoryKey) updateCategory(selectedCategoryKey);
+    // if (selectedCategoryKey) updateCategory(selectedCategoryKey);
+    // console.log(selectedCategoryKey);
+    if (option) updateCategory(option);
+    console.log(option);
   };
 
   return (
     <>
-      <Toast text={errors ?? undefined} />
       <div
         className="w-full flex justify-center text-white font-semibold rounded transition duration-300 ease-in-out"
         onClick={openModal}
@@ -110,8 +116,8 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
           <G_Header
             change={change}
             setChange={setChange}
-            subtitleOne={"ENTRADAS"}
-            subtitleTwo={"SAIDAS"}
+            subtitleOne={"RECEITAS"}
+            subtitleTwo={"DESPESAS"}
           />
 
           <main className="flex flex-col gap-2 py-2 px-4">
@@ -124,16 +130,16 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
 
             {change && (
               <G_Select
-                format={true}
+                subtitle="CATEGORIA"
                 onSelect={selectList}
-                optionList={incomeKeys.map((item) => categories[item].title)}
+                optionList={incomeKeys.map((item) => categories[item]?.title)}
               />
             )}
             {!change && (
               <G_Select
-                format={true}
+                subtitle="CATEGORIA"
                 onSelect={selectList}
-                optionList={expenseKeys.map((item) => categories[item].title)}
+                optionList={expenseKeys.map((item) => categories[item]?.title)}
               />
             )}
 

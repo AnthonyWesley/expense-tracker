@@ -10,7 +10,7 @@ export default function useAxios() {
   });
 
   const axiosInstance = axios.create({
-    baseURL: "https://expense-tracker-api-k7ih.onrender.com/",
+    baseURL: "https://expense-tracker-by-awl.netlify.app/",
     headers: {
       "Content-Type": "application/json",
       Authorization: authTokens.accessToken,
@@ -21,7 +21,7 @@ export default function useAxios() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://expense-tracker-api-k7ih.onrender.com/refresh",
+        "https://expense-tracker-by-awl.netlify.app/refresh",
         {
           refreshToken: authTokens.refreshToken,
         },

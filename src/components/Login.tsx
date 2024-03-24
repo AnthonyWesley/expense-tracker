@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { CircleUser, LockKeyhole } from "lucide-react";
+
 import G_InputArea from "./generics/G_InputArea";
 import { useApiContext } from "../context/ApiContext";
 import { useNavigate } from "react-router-dom";
 import G_Button from "./generics/G_Button";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export const Login = () => {
   const { loginUser, setLoading } = useApiContext();
@@ -41,7 +42,7 @@ export const Login = () => {
         onChange={(e) =>
           setCredentials({ ...credentials, email: e.target.value })
         }
-        icon={<CircleUser />}
+        icon={<Icon icon="ph:user-duotone" />}
       />
       <G_InputArea
         name="Password"
@@ -51,7 +52,7 @@ export const Login = () => {
         onChange={(e) =>
           setCredentials({ ...credentials, password: e.target.value })
         }
-        icon={<LockKeyhole />}
+        icon={<Icon icon="ri:lock-password-line" />}
       />
       <G_Button
         className="w-full text-center flex justify-center bg-blue-800 text-white py-4 p-2 mb-2 rounded-md hover:bg-blue-800"

@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { RecordType } from "./RecordType";
 import { UserType } from "./UserType";
+import { CategoriesType, CategoryApiType } from "./CategoryType";
 
 export type ApiContextType = {
   loading: boolean;
@@ -17,4 +18,11 @@ export type ApiContextType = {
     id: string,
     updatedItem: RecordType
   ) => Promise<AxiosResponse<any, any> | undefined>;
+
+  categories: CategoriesType;
+  apiCreateCategory: (item: CategoryApiType) => void;
+  apiDeleteCategory: (id: string) => void;
+  apiUpdateCategory: (id: string, updatedItem: CategoryApiType) => Promise<any>;
+
+  apiUpdateMany(currentName: string, updateName: string): Promise<any>;
 };

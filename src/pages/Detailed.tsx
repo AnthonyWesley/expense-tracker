@@ -1,18 +1,18 @@
-import { useAppManager } from "../context/AppManagerContext";
+import { useAppManager } from "../context/AppManager";
 import { dateHelpers } from "../helpers/DateHelpers";
-import {
-  getAllSunForCategories,
-  formattedCurrency,
-  NewList,
-} from "../helpers/others";
-import { categories } from "../data/categories";
+import { formattedCurrency } from "../helpers/others";
+
 import { useState } from "react";
 import G_Select from "../components/generics/G_Select";
+import { useApiContext } from "../context/ApiContext";
+import { CategorySummaryType } from "../type/CategoryType";
 
 export default function Detailed() {
-  const { filteredList, expense, income } = useAppManager();
-  const [newList, setNewList] = useState<NewList[] | undefined>();
-  const { expenseList, incomeList } = getAllSunForCategories(filteredList);
+  const { filteredList, expense, income, calculateTotalsByCategory } =
+    useAppManager();
+  const { categories } = useApiContext();
+  const [newList, setNewList] = useState<CategorySummaryType[] | undefined>();
+  const { expenseList, incomeList } = calculateTotalsByCategory(filteredList);
   const hasGreenColor = (newList ?? expenseList)[0]?.color !== "green";
 
   const selectList = (option: string) => {
@@ -32,7 +32,11 @@ export default function Detailed() {
           MOVIMENTAÇÕES DETALHADAS
         </div>
 
-        <G_Select optionList={["DESPESAS", "RECEITAS"]} onSelect={selectList} />
+        <G_Select
+          optionList={["DESPESAS", "RECEITAS"]}
+          onSelect={selectList}
+          className="w-32 p-2"
+        />
       </main>
       {(newList ?? expenseList)?.map((exp, index) => (
         <div key={index} className="my-1">

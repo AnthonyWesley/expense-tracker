@@ -1,10 +1,10 @@
-import { Plus } from "lucide-react";
 import { formattedCurrency } from "../../helpers/others";
-import { useAppManager } from "../../context/AppManagerContext";
+import { useAppManager } from "../../context/AppManager";
 import G_Modal from "../generics/G_Modal";
 import { useRecordStore } from "../../store/useRecordStore";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { useApiContext } from "../../context/ApiContext";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function FinancialSummary() {
   const { income, expense } = useAppManager();
@@ -40,7 +40,9 @@ export default function FinancialSummary() {
       <div className="flex flex-col bg-white/5 lg:py-20">
         <dd className="order-first text-2xl font-semibold tracking-tight text-white">
           <G_Modal
-            modalName={<Plus size={48} />}
+            modalName={
+              <Icon icon="pepicons-pencil:plus-circle-filled" width={48} />
+            }
             className="text-sm p-5 text-blue-900 hover:bg-gray-950"
             funcActions={{
               funcOne: async () =>

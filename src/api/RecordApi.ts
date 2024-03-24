@@ -53,6 +53,19 @@ class RecordApi {
       throw error;
     }
   }
+
+  async updateMany(currentName: string, updateName: string) {
+    try {
+      const response = await this.axiosInstance.put("/records/update", {
+        currentName,
+        updateName,
+      });
+      return response.data;
+    } catch (error: any) {
+      console.error("Erro ao editar item:", error.message);
+      throw error;
+    }
+  }
 }
 
 export default RecordApi;

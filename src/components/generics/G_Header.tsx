@@ -24,7 +24,7 @@ const G_Header: React.FC<G_HeaderProps> = ({
         </div>
       )}
 
-      <div className="flex justify-center gap-3 py-2">
+      <div className="flex justify-center gap-3 py-2 text-xl">
         <label
           className="w-full cursor-pointer"
           onClick={() => setChange(true)}
@@ -32,7 +32,9 @@ const G_Header: React.FC<G_HeaderProps> = ({
           <input type="radio" className="sr-only" name="pricing" />
           <div
             className={`max-w-xl rounded-md p-5 ${
-              change ? "border bg-gray-800 text-gray-50" : "text-gray-700"
+              change
+                ? "border border-blue-600 bg-gray-800 text-gray-50"
+                : "text-gray-700 "
             }`}
           >
             <div className="flex flex-col gap-1">{subtitleOne}</div>
@@ -48,7 +50,9 @@ const G_Header: React.FC<G_HeaderProps> = ({
           <input type="radio" className="sr-only" name="pricing" />
           <div
             className={`max-w-xl rounded-md  p-5 ${
-              !change ? "border bg-gray-800 text-gray-50" : "text-gray-700"
+              !change
+                ? "border border-blue-600 bg-gray-800 text-gray-50"
+                : "text-gray-700"
             }`}
           >
             <div className="flex flex-col gap-1">{subtitleTwo}</div>

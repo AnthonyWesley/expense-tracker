@@ -1,20 +1,21 @@
-import { ArrowUpFromLine, ArrowDownFromLine } from "lucide-react";
-import { categories } from "../../data/categories";
 import { formattedText, formattedCurrency } from "../../helpers/others";
-import { useAppManager } from "../../context/AppManagerContext";
+import { useAppManager } from "../../context/AppManager";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
 import G_Select from "../generics/G_Select";
 import { useState } from "react";
 import { RecordType } from "../../type/RecordType";
 import { useSearchParams } from "react-router-dom";
+import { useApiContext } from "../../context/ApiContext";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export function TransactionList({ className }: { className?: string }) {
+  const { categories } = useApiContext();
   const { filteredList } = useAppManager();
-  const navigate = useNavigate();
   const [newList, setNewList] = useState<RecordType[]>();
-  const optionList = ["TODOS", "RECEITAS", "DESPESAS"];
   const [_, setSearchParams] = useSearchParams();
+  const optionList = ["TODOS", "RECEITAS", "DESPESAS"];
+  const navigate = useNavigate();
 
   const selectList = (option: string) => {
     switch (option) {
@@ -49,16 +50,18 @@ export function TransactionList({ className }: { className?: string }) {
     >
       <td className="py-2 px-4">
         {categories[invoice.category]?.expense ? (
-          <ArrowUpFromLine color="red" />
+          <Icon icon="pepicons-print:triangle-down" color="red" width={30} />
         ) : (
-          <ArrowDownFromLine color="green" />
+          <Icon icon="pepicons-print:triangle-up" color="green" width={30} />
         )}
       </td>
       <td
         className="py-2 px-4"
-        style={{ backgroundColor: categories[invoice.category]?.color }}
+        style={{
+          backgroundColor: categories[invoice.category]?.color,
+        }}
       >
-        {categories[invoice.category]?.title}
+        {invoice.category}
       </td>
       <td className="py-2 px-4">{formattedText(invoice.description)}</td>
       <td
@@ -74,13 +77,17 @@ export function TransactionList({ className }: { className?: string }) {
 
   return (
     <section
-      className={`w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
+      className={`w-full bg-appSecondaryColor rounded-md overflow-hidden ${
         className || "col-span-2"
       }`}
     >
       <header className="flex items-center justify-between">
         <div className="text-center p-4 lg:flex-1">MOVIMENTAÇÕES</div>
-        <G_Select optionList={optionList} onSelect={selectList} />
+        <G_Select
+          optionList={optionList}
+          onSelect={selectList}
+          className="w-36 h-14"
+        />
       </header>
 
       {filteredList.length > 0 && (
