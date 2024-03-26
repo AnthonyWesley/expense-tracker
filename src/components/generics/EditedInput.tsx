@@ -24,7 +24,7 @@ export default function EditedInput({
   const toggleDisabled = (item: CategoryApiType, currentName?: string) => {
     addAlert([
       {
-        message: `Editando a categoria "${item.title}"...`,
+        message: `Editando: "${item.title}"...`,
         type: "warning",
       },
       {
@@ -36,19 +36,13 @@ export default function EditedInput({
       if (currentName?.trim() === item.title.trim()) {
         addAlert([
           {
-            message: `Nome deve ser diferente"...`,
+            message: `O nome deve ser diferente"...`,
           },
         ]);
         setIsDisabled(isDisabled);
         return;
       }
       onUpdate(item, currentName);
-      addAlert([
-        {
-          message: `categoria editada com sucesso!`,
-          type: "success",
-        },
-      ]);
     }
     setIsDisabled(!isDisabled);
   };

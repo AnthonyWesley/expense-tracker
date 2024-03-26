@@ -86,7 +86,7 @@ export function TransactionList({ className }: { className?: string }) {
         <G_Select
           optionList={optionList}
           onSelect={selectList}
-          className="w-36 h-14"
+          className="w-40 h-14"
         />
       </header>
 

@@ -59,7 +59,7 @@ export default function G_Select({
           {type !== "Colors" && (
             <span className="p-2 mx-2 text-left menu-hover font-medium text-white w-full">
               {optionList[0] ? (
-                optionList[0]
+                selectedOption
               ) : (
                 <p className="text-red-600 text-base italic font-semibold">
                   "Cadastre uma categoria!"
@@ -70,8 +70,8 @@ export default function G_Select({
 
           <Icon
             icon="pepicons-print:triangle-down"
-            className="mr-4"
-            width={20}
+            className="mr-2"
+            width={30}
           />
         </div>
 

@@ -10,7 +10,7 @@ export default function useAxios() {
   });
 
   const axiosInstance = axios.create({
-    baseURL: "https://expense-tracker-by-awl.netlify.app/",
+    baseURL: "https://expense-tracker-api-qwnr.onrender.com/",
     headers: {
       "Content-Type": "application/json",
       Authorization: authTokens.accessToken,
@@ -21,7 +21,7 @@ export default function useAxios() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://expense-tracker-by-awl.netlify.app/refresh",
+        "https://expense-tracker-api-qwnr.onrender.com/refresh",
         {
           refreshToken: authTokens.refreshToken,
         },
@@ -53,8 +53,9 @@ export default function useAxios() {
       return res;
     },
     (error) => {
-      if ([401, 403].includes(error.response.status)) {
+      if ([401, 403, 500].includes(error.response.status)) {
         window.alert("Email/Senha Inválido!");
+        localStorage.removeItem("authTokens");
         window.location.href = "/login";
       }
       if (error.response.status === 404) setLoading(false);

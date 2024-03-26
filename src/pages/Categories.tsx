@@ -77,9 +77,15 @@ const Categories: React.FC = () => {
 
       navigate("/categories");
       if (response) {
-        apiUpdateMany(currentName, item.title);
+        await apiUpdateMany(currentName, item.title);
+        addAlert([
+          {
+            message: `categoria editada com sucesso!`,
+            type: "success",
+          },
+        ]);
+        navigate("/categories");
       }
-      navigate("/categories");
     }
   };
 

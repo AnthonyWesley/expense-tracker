@@ -32,7 +32,7 @@ export const Toast = () => {
       const timeoutId = setTimeout(() => {
         addAlert(alerts);
         setShowToast(false);
-      }, 3500);
+      }, 4000);
 
       return () => clearTimeout(timeoutId);
     }
