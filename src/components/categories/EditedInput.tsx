@@ -23,6 +23,8 @@ export default function EditedInput({
   const { apiDeleteCategory } = useApiContext();
   const navigate = useNavigate();
 
+  console.log(isDisabled);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
@@ -94,19 +96,33 @@ export default function EditedInput({
           )
         }
         className={`${
-          isDisabled ? "bg-orange-500" : "bg-red-500"
+          isDisabled ? "bg-orange-500" : "bg-green-500"
         } flex justify-center w-20 items-center rounded-sm cursor-pointer`}
+        title={isDisabled ? "Editar" : "Confirmar"}
       >
         {isDisabled && <Icon icon="line-md:edit" width={30} height={30} />}
         {!isDisabled && <Icon icon="line-md:confirm" width={30} height={30} />}
       </div>
 
-      <G_Button
-        onClick={() => setCategoryId(category.id ? category.id : "")}
-        className="bg-blue-900 flex justify-center w-20"
-      >
-        <Icon icon="ph:trash" width={30} height={30} />
-      </G_Button>
+      {!isDisabled && (
+        <div
+          className="flex justify-center w-20 bg-red-500 items-center rounded-sm cursor-pointer"
+          onClick={() => setIsDisabled(true)}
+          title="Cancelar"
+        >
+          <Icon icon="line-md:close-small" width={30} />
+        </div>
+      )}
+
+      {isDisabled && (
+        <G_Button
+          onClick={() => setCategoryId(category.id ? category.id : "")}
+          className="bg-blue-900 flex justify-center w-20"
+          title="Deletar"
+        >
+          <Icon icon="ph:trash" width={30} height={30} />
+        </G_Button>
+      )}
     </div>
   );
 }
