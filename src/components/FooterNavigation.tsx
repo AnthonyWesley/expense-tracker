@@ -75,7 +75,7 @@ export default function FooterNavigation() {
             </Link>
           ))}
           <button
-            className="absolute -right-14 -top-[0px] z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
+            className="fixed -right-14 -top-[0px] z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
             onClick={toggleMenu}
           >
             {!isOpen && (
