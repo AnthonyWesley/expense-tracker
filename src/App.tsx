@@ -7,10 +7,11 @@ import PrivateRoutes from "./pages/PrivateRoute";
 import Record from "./pages/Record";
 import Records from "./pages/Records";
 import Home from "./pages/Home";
-import Spin from "./components/Spin";
+import Spin from "./components/home/Spin";
 import Categories from "./pages/Categories";
 import FooterNavigation from "./components/FooterNavigation";
-import { Toast } from "./components/generics/Toast";
+import { Toast } from "./components/ui/Toast";
+import Confirm from "./components/ui/Confirm";
 
 const App = () => {
   const { dataUser, loading } = useApiContext();
@@ -19,8 +20,8 @@ const App = () => {
     <main className="container m-auto flex flex-col">
       {loading && <Spin />}
 
-      {dataUser?.name && <HeaderNavigation />}
       <BrowserRouter>
+        {dataUser?.name && <FooterNavigation />}
         <Routes>
           <Route path="/" element={<PrivateRoutes />}>
             <Route index element={<Home />} />
@@ -33,9 +34,11 @@ const App = () => {
           <Route path="login" element={<LoginPage />} />
         </Routes>
 
-        {dataUser?.name && <FooterNavigation />}
+        {dataUser?.name && <HeaderNavigation />}
+
+        <Toast />
+        <Confirm />
       </BrowserRouter>
-      <Toast />
     </main>
   );
 };

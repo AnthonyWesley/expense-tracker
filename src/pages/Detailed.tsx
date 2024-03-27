@@ -3,7 +3,7 @@ import { dateHelpers } from "../helpers/DateHelpers";
 import { formattedCurrency } from "../helpers/others";
 
 import { useState } from "react";
-import G_Select from "../components/generics/G_Select";
+import G_Select from "../components/ui/G_Select";
 import { useApiContext } from "../context/ApiContext";
 import { CategorySummaryType } from "../type/CategoryType";
 

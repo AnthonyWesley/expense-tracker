@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAppManager } from "../../context/AppManager";
 import { formattedCurrency } from "../../helpers/others";
-import Chip from "../Chip";
-import G_Logo from "../generics/G_Logo";
+import Chip from "./Chip";
+import G_Logo from "../ui/G_Logo";
 import { useApiContext } from "../../context/ApiContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 

@@ -5,7 +5,7 @@ class UserApi {
   async register(user: UserType) {
     try {
       const response = await axios
-        .post("https://expense-tracker-by-awl.netlify.app/register", user, {
+        .post("https://expense-tracker-api-qwnr.onrender.com/register", user, {
           headers: { "Content-Type": "application/json" },
         })
         .catch((err) => {
@@ -27,7 +27,7 @@ class UserApi {
   async login(user: UserType) {
     try {
       const response = await axios.post(
-        "https://expense-tracker-by-awl.netlify.app/login",
+        "https://expense-tracker-api-qwnr.onrender.com/login",
         user,
         {
           headers: { "Content-Type": "application/json" },

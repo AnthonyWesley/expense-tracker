@@ -3,11 +3,11 @@ import { useApiContext } from "../context/ApiContext";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { findItemByParams, formattedCurrency } from "../helpers/others";
 import { useRecordStore } from "../store/useRecordStore";
-import { useState } from "react";
-import G_Button from "../components/generics/G_Button";
-import G_Modal from "../components/generics/G_Modal";
-import G_Confirm from "../components/generics/G_Confirm";
+import G_Button from "../components/ui/G_Button";
+import G_Modal from "../components/ui/G_Modal";
+
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useConfirmStore } from "../components/ui/Confirm";
 
 export default function Record() {
   const { id } = useParams() as { id: string };
@@ -16,13 +16,18 @@ export default function Record() {
   const { category, date, description, value } = useRecordStore();
   const navigate = useNavigate();
   const listId = findItemByParams(list, id);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const { handleConfirm } = useConfirmStore();
 
-  const onConfirm = async (confirm: boolean) => {
-    if (confirm) {
-      await apiDeleteRecord(id);
-      navigate("/");
-    }
+  const onConfirm = async () => {
+    handleConfirm({
+      message: "Deseja deletar o registro?",
+      callback: handleDelete,
+    });
+  };
+
+  const handleDelete = async () => {
+    await apiDeleteRecord(id);
+    navigate("/");
   };
 
   if (listId === undefined) {
@@ -90,19 +95,10 @@ export default function Record() {
         />
 
         <hr />
-        <G_Button
-          onClick={() => setIsAlertOpen(true)}
-          className="bg-red-600 p-4"
-        >
+        <G_Button onClick={onConfirm} className="bg-red-600 p-4">
           DELETAR
         </G_Button>
       </div>
-      <G_Confirm
-        description="Deseja deletar o registro?"
-        isOpen={isAlertOpen}
-        onClose={() => setIsAlertOpen(false)}
-        onConfirm={onConfirm}
-      />
     </div>
   );
 }

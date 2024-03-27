@@ -1,8 +1,7 @@
 import { Icon } from "@iconify/react";
-
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import G_Confirm from "./generics/G_Confirm";
+import { useConfirmStore } from "./ui/Confirm";
 const links = [
   {
     href: "/",
@@ -21,18 +20,25 @@ export default function FooterNavigation() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const { handleConfirm } = useConfirmStore();
 
-  const onConfirm = (confirm: boolean) => {
-    if (confirm) {
-      localStorage.removeItem("authTokens");
-      window.location.reload();
-      navigate("/login");
-    }
+  const onConfirm = () => {
+    handleConfirm({
+      message: "Deseja fazer o logout ?",
+      callback: logOut,
+    });
   };
+
+  const logOut = () => {
+    localStorage.removeItem("authTokens");
+    window.location.reload();
+    navigate("/login");
+  };
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   const closeMenu = () => {
     links.map((link) =>
       location.pathname == link.href
@@ -48,25 +54,18 @@ export default function FooterNavigation() {
   }, [location.pathname]);
 
   return (
-    <nav className="z-40 w-full flex items-center justify-between fixed bottom-0 left-0 bg-appSecondaryColor p-1 lg:text-2xl">
-      <G_Confirm
-        description="Deseja fazer o logout ?"
-        isOpen={isAlertOpen}
-        onClose={() => setIsAlertOpen(false)}
-        onConfirm={onConfirm}
-      />
-
+    <nav className="z-40 w-full flex items-center justify-between fixed top-0 left-0 bg-appSecondaryColor p-1 lg:text-2xl">
       <div className={`flex justify-end lg:justify-center`}>
         <div
           className={`${
             isOpen ? "translate-x-0" : "-translate-x-full"
-          }  fixed mt-20 left-0 top-0 z-40 flex h-screen w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
+          }  fixed mt-20 left-0 bottom-0 z-40 flex h-screen w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
         >
           {links.map((link) => (
             <Link
               key={link.text}
               to={link.href}
-              className={`relative cursor-pointer text-base w-full p-4 my-1${
+              className={`relative cursor-pointer text-base w-full p-4 mb-1${
                 location.pathname == link.href
                   ? " text-zinc-50 bg-gray-700"
                   : " p-4 text-zinc-400 hover:text-zinc-50 hover:bg-gray-700"
@@ -76,7 +75,7 @@ export default function FooterNavigation() {
             </Link>
           ))}
           <button
-            className="absolute -right-14 bottom-[85px] z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-1 rounded-sm"
+            className="absolute -right-14 -top-[0px] z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
             onClick={toggleMenu}
           >
             {!isOpen && (
@@ -99,7 +98,7 @@ export default function FooterNavigation() {
       </div>
 
       <div
-        onClick={() => setIsAlertOpen(true)}
+        onClick={onConfirm}
         className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-1 rounded-sm"
       >
         <Icon icon="line-md:logout" color="orange" width={40} />

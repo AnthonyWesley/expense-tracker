@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Register } from "../components/Register";
-import { Login } from "../components/Login";
+import { Register } from "../components/login/Register";
+import { Login } from "../components/login/Login";
 
-import G_Header from "../components/generics/G_Header";
-import G_Logo from "../components/generics/G_Logo";
+import G_Header from "../components/ui/G_Header";
+import G_Logo from "../components/ui/G_Logo";
 
 export default function LoginPage() {
   const [change, setChange] = useState(true);

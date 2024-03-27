@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import G_InputArea from "../components/generics/G_InputArea";
-import G_Select from "../components/generics/G_Select";
-import G_Button from "../components/generics/G_Button";
+import G_InputArea from "../components/ui/G_InputArea";
+import G_Select from "../components/ui/G_Select";
+import G_Button from "../components/ui/G_Button";
 import { useApiContext } from "../context/ApiContext";
 import { CategoryApiType } from "../type/CategoryType";
-import EditedInput from "../components/generics/EditedInput";
+import EditedInput from "../components/categories/EditedInput";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useToastStore } from "../components/generics/Toast";
+import { useToastStore } from "../components/ui/Toast";
 import { tableColors } from "../data/tableColors";
 
 const status = ["RECEITAS", "DESPESAS"];
@@ -26,7 +26,6 @@ const Categories: React.FC = () => {
     apiUpdateMany,
   } = useApiContext();
 
-  // const [isAlertOpen, setIsAlertOpen] = useState(false);
   const categoriesArray = Object.values(categories);
   const { addAlert } = useToastStore();
   const navigate = useNavigate();
@@ -77,9 +76,15 @@ const Categories: React.FC = () => {
 
       navigate("/categories");
       if (response) {
-        apiUpdateMany(currentName, item.title);
+        await apiUpdateMany(currentName, item.title);
+        addAlert([
+          {
+            message: `categoria editada com sucesso!`,
+            type: "success",
+          },
+        ]);
+        navigate("/categories");
       }
-      navigate("/categories");
     }
   };
 
@@ -94,8 +99,6 @@ const Categories: React.FC = () => {
   const selectColor = (option: string) => {
     setNewCategory((event) => ({ ...event, color: option }));
   };
-
-  // const onConfirm = async (id: string, confirm: boolean) => {};
 
   return (
     <section className="container w-full flex flex-col mx-auto my-20 gap-2 p-2">
@@ -141,11 +144,7 @@ const Categories: React.FC = () => {
             .filter((item) => !item.expense)
             .map((category, index) => (
               <div key={index} className="flex gap-2 w-full my-1">
-                <EditedInput
-                  category={category}
-                  onDelete={deleteCategory}
-                  onUpdate={updateCategory}
-                />
+                <EditedInput category={category} onUpdate={updateCategory} />
               </div>
             ))}
         </div>
@@ -158,11 +157,7 @@ const Categories: React.FC = () => {
             .filter((item) => item.expense)
             .map((category, index) => (
               <div key={index} className="flex gap-2 w-full my-1">
-                <EditedInput
-                  category={category}
-                  onDelete={deleteCategory}
-                  onUpdate={updateCategory}
-                />
+                <EditedInput category={category} onUpdate={updateCategory} />
               </div>
             ))}
         </div>

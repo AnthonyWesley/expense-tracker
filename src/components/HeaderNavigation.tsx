@@ -6,7 +6,7 @@ export default function HeaderNavigation() {
   const { prevMonth, nextMonth, currentMonth } = useAppManager();
 
   return (
-    <header className="w-full fixed top-0 left-0 bg-appSecondaryColor rounded-lg p-1 z-30 lg:text-2xl">
+    <header className="w-full fixed bottom-0 left-0 bg-appSecondaryColor rounded-lg p-1 z-30 lg:text-2xl">
       <div className="flex justify-around items-center">
         <div
           onClick={prevMonth}

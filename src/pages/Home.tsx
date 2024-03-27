@@ -10,6 +10,7 @@ export default function Home() {
       <WalletArea />
       <FinancialSummary />
       <Expenses />
+
       <TransactionList />
     </section>
   );

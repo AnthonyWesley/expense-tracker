@@ -2,7 +2,7 @@ import { formattedText, formattedCurrency } from "../../helpers/others";
 import { useAppManager } from "../../context/AppManager";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
-import G_Select from "../generics/G_Select";
+import G_Select from "../ui/G_Select";
 import { useState } from "react";
 import { RecordType } from "../../type/RecordType";
 import { useSearchParams } from "react-router-dom";
@@ -86,7 +86,7 @@ export function TransactionList({ className }: { className?: string }) {
         <G_Select
           optionList={optionList}
           onSelect={selectList}
-          className="w-36 h-14"
+          className="w-40 h-14"
         />
       </header>
 

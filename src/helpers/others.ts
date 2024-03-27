@@ -1,4 +1,4 @@
-import { ToastType } from "../components/generics/Toast";
+import { ToastType } from "../components/ui/Toast";
 import { CategoriesType } from "../type/CategoryType";
 
 import { RecordType } from "../type/RecordType";

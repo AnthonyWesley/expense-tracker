@@ -1,6 +1,6 @@
 import { formattedCurrency } from "../../helpers/others";
 import { useAppManager } from "../../context/AppManager";
-import G_Modal from "../generics/G_Modal";
+import G_Modal from "../ui/G_Modal";
 import { useRecordStore } from "../../store/useRecordStore";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { useApiContext } from "../../context/ApiContext";
