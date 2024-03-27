@@ -59,7 +59,7 @@ export default function FooterNavigation() {
         <div
           className={`${
             isOpen ? "translate-x-0" : "-translate-x-full"
-          }  fixed mt-20 left-0 bottom-0 z-40 flex h-dvh w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
+          }  fixed left-0 bottom-0 z-40 flex h-dvh w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
         >
           {links.map((link) => (
             <Link
