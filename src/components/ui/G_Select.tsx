@@ -6,7 +6,7 @@ interface GSelectProps {
   optionList: string[];
   value?: string | boolean | undefined;
   subtitle?: string;
-  type?: "Colors";
+  type?: "Colors" | "noSelected";
   className?: string;
 }
 
@@ -25,7 +25,8 @@ export default function G_Select({
 
   useEffect(() => {
     if (type === "Colors") setSelectedOption(value as string);
-  }, [value]);
+    // if (type === "noSelected") setSelectedOption("ESCOLHA UMA CATEGORIA");
+  }, [value, optionList]);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -58,13 +59,8 @@ export default function G_Select({
           {type === "Colors" && <span className="p-3 rounded-sm">COR</span>}
           {type !== "Colors" && (
             <span className="p-2 mx-2 text-left menu-hover font-medium text-white w-full">
-              {optionList[0] ? (
-                selectedOption
-              ) : (
-                <p className="text-red-600 text-base italic font-semibold">
-                  "Cadastre uma categoria!"
-                </p>
-              )}
+              {!selectedOption && "ESCOLHA UMA CATEGORIA"}
+              {selectedOption}
             </span>
           )}
 

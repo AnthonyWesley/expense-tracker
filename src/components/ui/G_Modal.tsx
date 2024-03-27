@@ -132,6 +132,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
               <G_Select
                 subtitle="CATEGORIA"
                 onSelect={selectList}
+                type="noSelected"
                 optionList={incomeKeys.map((item) => categories[item]?.title)}
               />
             )}
@@ -139,6 +140,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
               <G_Select
                 subtitle="CATEGORIA"
                 onSelect={selectList}
+                type="noSelected"
                 optionList={expenseKeys.map((item) => categories[item]?.title)}
               />
             )}
