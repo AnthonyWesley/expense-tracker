@@ -18,13 +18,8 @@ const Categories: React.FC = () => {
     expense: false,
   });
 
-  const {
-    categories,
-    apiCreateCategory,
-    apiDeleteCategory,
-    apiUpdateCategory,
-    apiUpdateMany,
-  } = useApiContext();
+  const { categories, apiCreateCategory, apiUpdateCategory, apiUpdateMany } =
+    useApiContext();
 
   const categoriesArray = Object.values(categories);
   const { addAlert } = useToastStore();
@@ -60,11 +55,6 @@ const Categories: React.FC = () => {
         expense: false,
       });
     }
-  };
-
-  const deleteCategory = async (id: string) => {
-    await apiDeleteCategory(id);
-    navigate("/categories");
   };
 
   const updateCategory = async (
