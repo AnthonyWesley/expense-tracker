@@ -59,7 +59,7 @@ export default function FooterNavigation() {
         <div
           className={`${
             isOpen ? "translate-x-0" : "-translate-x-full"
-          }  fixed left-0 bottom-0 z-40 flex h-dvh w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
+          }  fixed left-0 top-0 z-40 flex h-dvh w-52 flex-col items-start justify-start bg-gray-800/95 transition-transform duration-300 ease-in-out`}
         >
           {links.map((link) => (
             <Link
@@ -75,7 +75,7 @@ export default function FooterNavigation() {
             </Link>
           ))}
           <button
-            className="fixed -right-14 -top-[0px] z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
+            className="fixed -right-14 top-0 z-50 cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
             onClick={toggleMenu}
           >
             {!isOpen && (
