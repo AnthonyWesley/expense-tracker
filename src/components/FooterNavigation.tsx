@@ -8,12 +8,12 @@ const links = [
     text: "Home",
   },
   {
-    href: "/record/detailed",
-    text: "Registros",
-  },
-  {
     href: "/categories",
     text: "Categorias",
+  },
+  {
+    href: "/movements",
+    text: "Movimentações",
   },
 ];
 export default function FooterNavigation() {

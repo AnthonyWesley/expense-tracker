@@ -10,7 +10,7 @@ export default function HeaderNavigation() {
       <div className="flex justify-around items-center">
         <div
           onClick={prevMonth}
-          className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
+          className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-1 rounded-sm"
         >
           <Icon icon="solar:double-alt-arrow-left-line-duotone" width={50} />
         </div>
@@ -19,7 +19,7 @@ export default function HeaderNavigation() {
         </div>
         <div
           onClick={nextMonth}
-          className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-2 rounded-sm"
+          className="cursor-pointer hover:bg-appPrimaryColor transition duration-300 p-1 rounded-sm"
         >
           <Icon icon="solar:double-alt-arrow-right-line-duotone" width={50} />
         </div>

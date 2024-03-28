@@ -6,7 +6,7 @@ import WalletArea from "../components/home/WalletArea";
 
 export default function Home() {
   return (
-    <section className="container mt-20 flex flex-col lg:grid lg:grid-cols-3 gap-2">
+    <section className="container mt-16 flex flex-col lg:grid lg:grid-cols-3 gap-2">
       <WalletArea />
       <FinancialSummary />
       <Expenses />

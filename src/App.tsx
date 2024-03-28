@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useApiContext } from "./context/ApiContext";
 import HeaderNavigation from "./components/HeaderNavigation";
-import Detailed from "./pages/Detailed";
+
 import LoginPage from "./pages/LoginPage";
 import PrivateRoutes from "./pages/PrivateRoute";
 import Record from "./pages/Record";
@@ -12,6 +12,7 @@ import Categories from "./pages/Categories";
 import FooterNavigation from "./components/FooterNavigation";
 import { Toast } from "./components/ui/Toast";
 import Confirm from "./components/ui/Confirm";
+import Movements from "./pages/Movements";
 
 const App = () => {
   const { dataUser, loading } = useApiContext();
@@ -27,7 +28,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="records" element={<Records />} />
             <Route path="record/:id" element={<Record />} />
-            <Route path="record/detailed" element={<Detailed />} />
+            <Route path="movements" element={<Movements />} />
             <Route path="categories" element={<Categories />} />
           </Route>
 
