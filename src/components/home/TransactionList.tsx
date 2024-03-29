@@ -18,27 +18,28 @@ export function TransactionList({ className }: { className?: string }) {
   const navigate = useNavigate();
 
   const selectList = (option: string) => {
-    switch (option) {
-      case "TODOS":
+    const actions: { [key: string]: () => void } = {
+      TODOS: () => {
         setSearchParams({ option: "TODOS" });
         setNewList(filteredList);
-        break;
-      case "RECEITAS":
+      },
+      RECEITAS: () => {
         setSearchParams({ option: "RECEITAS" });
-
         setNewList(
           filteredList.filter((item) => !categories[item?.category]?.expense)
         );
-        break;
-      case "DESPESAS":
+      },
+      DESPESAS: () => {
         setSearchParams({ option: "DESPESAS" });
-
         setNewList(
           filteredList.filter((item) => categories[item?.category]?.expense)
         );
-        break;
-      default:
-        break;
+      },
+    };
+
+    const action = actions[option];
+    if (action) {
+      action();
     }
   };
 
@@ -77,7 +78,7 @@ export function TransactionList({ className }: { className?: string }) {
 
   return (
     <section
-      className={`w-full bg-appSecondaryColor rounded-md overflow-hidden ${
+      className={`w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
         className || "col-span-2"
       }`}
     >

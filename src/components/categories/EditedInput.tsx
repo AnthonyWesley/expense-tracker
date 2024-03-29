@@ -23,7 +23,7 @@ export default function EditedInput({
   const { apiDeleteCategory } = useApiContext();
   const navigate = useNavigate();
 
-  console.log(isDisabled);
+  console.log(categoryId);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -68,6 +68,7 @@ export default function EditedInput({
         message: "Deseja deletar a categoria?",
         callback: async () => await deleteCategory(),
       });
+      setCategoryId("");
     }
   }, [categoryId]);
 

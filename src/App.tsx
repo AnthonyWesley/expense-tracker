@@ -18,7 +18,7 @@ const App = () => {
   const { dataUser, loading } = useApiContext();
 
   return (
-    <main className="container m-auto flex flex-col">
+    <main className="container m-auto lg:mt-4 flex flex-col">
       {loading && <Spin />}
 
       <BrowserRouter>
