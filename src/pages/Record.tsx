@@ -74,7 +74,7 @@ export default function Record() {
       <hr className="my-4 text-right" />
 
       <div className="flex h-5 justify-end space-x-2 text-sm my-2 ">
-        <G_Button onClick={() => navigate("/")} className="bg-blue-500 p-4">
+        <G_Button onClick={() => navigate(-1)} className="bg-blue-500 p-4">
           VOLTAR
         </G_Button>
         <hr />

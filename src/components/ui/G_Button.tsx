@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 
 interface G_ButtonProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children: string | JSX.Element | JSX.Element[];
+  children: string | JSX.Element | (string | JSX.Element)[];
 }
 
 export default function G_Button({

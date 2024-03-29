@@ -6,6 +6,7 @@ import { useAppManager } from "../context/AppManager";
 import { useReactToPrint } from "react-to-print";
 import { dateHelpers } from "../helpers/DateHelpers";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import G_Button from "../components/ui/G_Button";
 
 const Movements = () => {
   const {
@@ -28,32 +29,29 @@ const Movements = () => {
   const selectList = (option: string) => {
     const details = {
       // TODOS: [...incomeList, ...expenseList],
-      SIMPES: false,
+      SIMPLIFICADO: false,
       DETALHADO: true,
     }[option];
     setIsDetailed(details);
   };
 
-  console.log(dateHelpers.getCurrentMonth());
-
   return (
     <section className="w-full mx-auto rounded-lg my-16">
-      <div className="text-center text-gray-50 p-4 lg:flex-1 text-2xl">
-        MOVIMENTAÇÕES
-      </div>
-      <main className="flex items-center justify-between bg-slate-900 mb-1">
+      <div className="text-center p-4 lg:flex-1 text-2xl">MOVIMENTAÇÕES</div>
+      <main className="w-full flex items-center justify-between mb-1 bg-slate-900">
         <G_Select
-          optionList={["SIMPLES", "DETALHADO"]}
+          optionList={["SIMPLIFICADO", "DETALHADO"]}
           onSelect={selectList}
-          className="w-40 h-14"
+          className="w-44 h-14"
         />
 
-        <div
+        <G_Button
           onClick={reactToPrint}
-          className="ml-2 p-3 flex items-center gap-2 bg-blue-800"
+          className="bg-blue-900 flex justify-center w-20 p-3"
+          title="Baixar Relatório"
         >
           PDF <Icon icon="mdi:download" width={30} />
-        </div>
+        </G_Button>
       </main>
 
       <div ref={contentDocument}>

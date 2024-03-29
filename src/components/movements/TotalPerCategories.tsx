@@ -8,8 +8,8 @@ type TotalProps = {
 export default function TotalPerCategories({ total, color }: TotalProps) {
   return (
     <footer
-      style={{ backgroundColor: color }}
-      className={`flex justify-between items-center text-white font-bold p-2`}
+      style={{ color: color }}
+      className={`bg-white flex justify-between items-center border-[.1px] border-black font-bold p-2`}
     >
       <p className="text-lx lg:text-2xl">
         TOTAL DE {color != "#008000" ? "GASTOS" : "RECEITAS"}
