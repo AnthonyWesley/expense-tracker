@@ -54,7 +54,7 @@ export default function MovementsList({ list, color, detailed }: ListProps) {
 
           <h1
             style={{ color: color, borderColor: detailed ? color : "" }}
-            className={`px-3 font-semibold text-lg self-end text-right w-32 border-b`}
+            className={`px-3 font-semibold text-lg self-end text-right w-32 border-t`}
           >
             {formattedCurrency(exp.totalValue)}
           </h1>

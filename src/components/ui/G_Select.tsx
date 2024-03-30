@@ -75,7 +75,7 @@ export default function G_Select({
           <div
             className={`${
               type === "Colors"
-                ? "w-[380px] h-[380px] grid grid-cols-5 p-1 gap-1 overflow-hidden rounded-md"
+                ? "w-[360px] h-[460px] grid grid-cols-6 p-1 gap-[2px] overflow-hidden rounded-md"
                 : "w-full max-h-[150px]"
             } rounded-md overflow-auto text-xs absolute top-full mt-1 bg-gray-900 text-gray-800 shadow-xl`}
           >

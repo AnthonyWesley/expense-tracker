@@ -1,27 +1,60 @@
 export const tableColors = [
-  "#0f172a", // slate-900
-  "#64748b", // slate
-  "#6b7280", // gray
-  "#71717a", // zinc
-  "#f97316", // orange
-  "#f59e0b", // amber
-  "#eab308", // yellow
-  "#84cc16", // lime
-  "#22c55e", // green
-  "#10b981", // emerald
-  "#14b8a6", // teal
-  "#06b6d4", // cyan
-  "#0ea5e9", // sky
-  "#3b82f6", // blue
-  "#2c3e50", // Midnight Blue
-  "#6366f1", // indigo
-  "#6f42c1", // Deep Purple
-  "#8b5cf6", // violet
-  "#a855f7", // purple
-  "#d946ef", // fuschia
-  "#ec4899", // pink
-  "#cf6a87", // Pale Pink
-  "#f43f5e", // rose
-  "#ef4444", // red
-  "#c0392b", // Indian Red
+  "#836FFF",
+  "#483D8B",
+  "#191970",
+  "#000080",
+  "#0000FF",
+  "#6495ED",
+  "#4169E1",
+  "#1E90FF",
+  "#00BFFF",
+  "#87CEEB",
+  "#ADD8E6",
+  "#4682B4",
+  "#B0C4DE",
+  "#708090",
+  "#00FFFF",
+  "#00CED1",
+  "#008B8B",
+  "#7FFFD4",
+  "#66CDAA",
+  "#5F9EA0",
+  "#2F4F4F",
+  "#00FF7F",
+  "#8FBC8F",
+  "#2E8B57",
+  "#008000",
+  "#00FF00",
+  "#ADFF2F",
+  "#556B2F",
+  "#BDB76B",
+  "#DAA520",
+  "#8B4513",
+  "#A0522D",
+  "#BC8F8F",
+  "#CD853F",
+  "#D2691E",
+  "#DEB887",
+  "#7B68EE",
+  "#9370DB",
+  "#8A2BE2",
+  "#4B0082",
+  "#9400D3",
+  "#8B008B",
+  "#FF1493",
+  "#FF69B4",
+  "#FFC0CB",
+  "#F08080",
+  "#DC143C",
+  "#800000",
+  "#A52A2A",
+  "#FFA07A",
+  "#FF7F50",
+  "#FF6347",
+  "#FF0000",
+  "#FF4500",
+  "#FF8C00",
+  "#FFA500",
+  "#FFD700",
+  "#F0E68C",
 ];
