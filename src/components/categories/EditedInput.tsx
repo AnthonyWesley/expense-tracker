@@ -23,8 +23,6 @@ export default function EditedInput({
   const { apiDeleteCategory } = useApiContext();
   const navigate = useNavigate();
 
-  console.log(categoryId);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };

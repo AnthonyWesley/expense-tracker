@@ -6,27 +6,19 @@ interface GSelectProps {
   optionList: string[];
   value?: string | boolean | undefined;
   subtitle?: string;
-  type?: "Colors" | "noSelected";
+  type?: "noSelected";
   className?: string;
 }
 
 export default function G_Select({
   onSelect,
   optionList,
-  value,
   subtitle,
   type,
   className,
 }: GSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    type !== "Colors" ? optionList[0] : null
-  );
-
-  useEffect(() => {
-    if (type === "Colors") setSelectedOption(value as string);
-    // if (type === "noSelected") setSelectedOption("ESCOLHA UMA CATEGORIA");
-  }, [value, optionList]);
+  const [selectedOption, setSelectedOption] = useState(optionList[0]);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -56,13 +48,10 @@ export default function G_Select({
           onClick={toggleDropdown}
           style={{ backgroundColor: selectedOption ? selectedOption : "" }}
         >
-          {type === "Colors" && <span className="p-3 rounded-sm">COR</span>}
-          {type !== "Colors" && (
-            <span className="p-2 mx-2 text-left menu-hover font-medium text-white w-full">
-              {!selectedOption && "ESCOLHA UMA CATEGORIA"}
-              {selectedOption}
-            </span>
-          )}
+          <span className="p-2 mx-2 text-left menu-hover font-medium text-white w-full">
+            {!selectedOption && "ESCOLHA UMA CATEGORIA"}
+            {selectedOption}
+          </span>
 
           <Icon
             icon="pepicons-print:triangle-down"
@@ -73,11 +62,8 @@ export default function G_Select({
 
         {isOpen && (
           <div
-            className={`${
-              type === "Colors"
-                ? "w-[360px] h-[460px] grid grid-cols-6 p-1 gap-[2px] overflow-hidden rounded-md"
-                : "w-full max-h-[150px]"
-            } rounded-md overflow-auto text-xs absolute top-full mt-1 bg-gray-900 text-gray-800 shadow-xl`}
+            className={`w-full max-h-[150px]
+             rounded-md overflow-auto text-xs absolute top-full mt-1 bg-gray-900 text-gray-800 shadow-xl`}
           >
             {optionList?.map((option, index) => (
               <div
@@ -85,12 +71,9 @@ export default function G_Select({
                 className={`p-4 border border-gray-950/40 block font-semibold text-gray-100 hover:bg-gray-600 ${
                   selectedOption === option ? "bg-gray-600" : ""
                 }`}
-                style={{
-                  backgroundColor: type === "Colors" ? option : "",
-                }}
                 onClick={() => handleOptionClick(option)}
               >
-                {type != "Colors" && option}
+                {option}
               </div>
             ))}
           </div>

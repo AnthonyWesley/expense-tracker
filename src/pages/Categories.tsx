@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useToastStore } from "../components/ui/Toast";
 import { tableColors } from "../data/tableColors";
+import SelectColors from "../components/ui/SelectColors";
 
 const status = ["RECEITAS", "DESPESAS"];
 const Categories: React.FC = () => {
@@ -87,6 +88,8 @@ const Categories: React.FC = () => {
   };
 
   const selectColor = (option: string) => {
+    // console.log(option);
+
     setNewCategory((event) => ({ ...event, color: option }));
   };
 
@@ -103,12 +106,17 @@ const Categories: React.FC = () => {
         />
 
         <div className="flex w-full gap-2">
-          <G_Select
+          {/* <G_Select
             onSelect={selectColor}
             optionList={tableColors}
             type="Colors"
             value={newCategory.color}
             className="w-full"
+          /> */}
+          <SelectColors
+            onSelect={selectColor}
+            categories={categoriesArray}
+            value={newCategory.color}
           />
           <G_Select
             onSelect={selectStatus}
