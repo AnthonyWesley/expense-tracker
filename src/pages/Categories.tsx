@@ -105,13 +105,6 @@ const Categories: React.FC = () => {
         />
 
         <div className="flex w-full gap-2">
-          {/* <G_Select
-            onSelect={selectColor}
-            optionList={tableColors}
-            type="Colors"
-            value={newCategory.color}
-            className="w-full"
-          /> */}
           <SelectColors
             onSelect={selectColor}
             categories={categoriesArray}
@@ -121,6 +114,7 @@ const Categories: React.FC = () => {
             onSelect={selectStatus}
             optionList={status}
             className="w-full"
+            value={newCategory.color}
           />
 
           <G_Button
@@ -135,7 +129,7 @@ const Categories: React.FC = () => {
       <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-2">
         <div className="bg-appSecondaryColor min-h-52 w-full">
           <h1 className="flex items-center text-2xl gap-2 text-green-600 font-semibold p-3">
-            <Icon icon="pepicons-print:triangle-down" /> RECEITAS
+            <Icon icon="pepicons-print:triangle-up" /> RECEITAS
           </h1>
           {categoriesArray
             .filter((item) => !item.expense)

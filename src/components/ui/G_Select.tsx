@@ -6,7 +6,6 @@ interface GSelectProps {
   optionList: string[];
   value?: string | boolean | undefined;
   subtitle?: string;
-  type?: "noSelected";
   className?: string;
 }
 
@@ -14,11 +13,13 @@ export default function G_Select({
   onSelect,
   optionList,
   subtitle,
-
+  // value,
   className,
 }: GSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(optionList[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    subtitle ? "" : optionList[0]
+  );
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -49,7 +50,6 @@ export default function G_Select({
           style={{ backgroundColor: selectedOption ? selectedOption : "" }}
         >
           <span className="p-2 mx-2 text-left menu-hover font-medium text-white w-full">
-            {!selectedOption && "ESCOLHA UMA CATEGORIA"}
             {selectedOption}
           </span>
 

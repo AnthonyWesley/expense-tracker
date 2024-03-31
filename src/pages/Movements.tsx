@@ -42,7 +42,7 @@ const Movements = () => {
         <G_Select
           optionList={["SIMPLIFICADAS", "DETALHADAS"]}
           onSelect={selectList}
-          className="w-44 h-14"
+          className="w-52 h-14"
         />
 
         <G_Button

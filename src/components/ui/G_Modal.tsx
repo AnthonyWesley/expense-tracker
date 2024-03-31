@@ -1,23 +1,15 @@
-import {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  MouseEventHandler,
-  HTMLAttributes,
-} from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useRecordStore } from "../../store/useRecordStore";
+import { dateHelpers } from "../../helpers/DateHelpers";
+import { categorizeCategories, validateFields } from "../../helpers/others";
+import { useApiContext } from "../../context/ApiContext";
+import { useToastStore } from "./Toast";
+import G_Header from "./G_Header";
 import G_InputArea from "./G_InputArea";
 import G_Button from "./G_Button";
 import G_Select from "./G_Select";
-import { dateHelpers } from "../../helpers/DateHelpers";
-import { categorizeCategories, validateFields } from "../../helpers/others";
-import G_Header from "./G_Header";
-import { useApiContext } from "../../context/ApiContext";
 
-import { useToastStore } from "./Toast";
-
-interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   modalName?: string | JSX.Element;
   className?: string;
   funcActions?: {
@@ -39,18 +31,17 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
     value,
   } = useRecordStore();
 
+  const overlay = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [change, setChange] = useState(true);
-  const overlay = useRef(null);
   const { categories } = useApiContext();
   const { incomeKeys, expenseKeys } = categorizeCategories(categories);
+  const { addAlert } = useToastStore();
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const { addAlert } = useToastStore();
-
-  const clickCloseRef: MouseEventHandler<HTMLElement> = (event) => {
+  const clickCloseRef: React.MouseEventHandler<HTMLElement> = (event) => {
     if (event.target === overlay.current) closeModal();
   };
 
@@ -82,15 +73,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
   }, [modalOpen, change]);
 
   const selectList = (option: string) => {
-    // const categoryKeys = Object.keys(categories);
-    // const selectedCategoryKey = categoryKeys.find(
-    //   (key) => categories[key].title.toLowerCase() === option.toLowerCase()
-    // );
-
-    // if (selectedCategoryKey) updateCategory(selectedCategoryKey);
-    // console.log(selectedCategoryKey);
     if (option) updateCategory(option);
-    console.log(option);
   };
 
   return (
@@ -132,7 +115,6 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
               <G_Select
                 subtitle="CATEGORIA"
                 onSelect={selectList}
-                type="noSelected"
                 optionList={incomeKeys.map((item) => categories[item]?.title)}
               />
             )}
@@ -140,7 +122,6 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
               <G_Select
                 subtitle="CATEGORIA"
                 onSelect={selectList}
-                type="noSelected"
                 optionList={expenseKeys.map((item) => categories[item]?.title)}
               />
             )}

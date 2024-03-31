@@ -30,10 +30,6 @@ export default function EditedInput({
   const toggleDisabled = (item: CategoryApiType, currentName?: string) => {
     addAlert([
       {
-        message: `Editando: "${item.title}"...`,
-        type: "warning",
-      },
-      {
         message: `\u2713 para confirmar`,
         type: "warning",
       },

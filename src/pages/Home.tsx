@@ -1,7 +1,7 @@
 // import Expenses from "../components/home/Expenses";
 import Expenses from "../components/home/Expenses";
 import FinancialSummary from "../components/home/FinancialSummary";
-import { TransactionList } from "../components/home/TransactionList";
+import { RecordList } from "../components/home/RecordList";
 import WalletArea from "../components/home/WalletArea";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <WalletArea />
       <FinancialSummary />
       <Expenses />
-      <TransactionList />
+      <RecordList />
     </section>
   );
 }

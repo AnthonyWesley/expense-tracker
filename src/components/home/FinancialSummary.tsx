@@ -40,9 +40,7 @@ export default function FinancialSummary() {
       <div className="flex flex-col bg-white/5 lg:py-20">
         <dd className="order-first text-2xl font-semibold tracking-tight text-white">
           <G_Modal
-            modalName={
-              <Icon icon="pepicons-pencil:plus-circle-filled" width={48} />
-            }
+            modalName={<Icon icon="heroicons:plus-small" width={48} />}
             className="text-sm p-5 text-blue-900 hover:bg-gray-950"
             funcActions={{
               funcOne: async () =>
