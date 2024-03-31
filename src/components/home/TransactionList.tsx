@@ -83,7 +83,7 @@ export function TransactionList({ className }: { className?: string }) {
       }`}
     >
       <header className="flex items-center justify-between">
-        <div className="text-center p-4 lg:flex-1">MOVIMENTAÇÕES</div>
+        <div className="text-center p-4 lg:flex-1">REGISTROS</div>
         <G_Select
           optionList={optionList}
           onSelect={selectList}

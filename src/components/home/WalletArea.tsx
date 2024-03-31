@@ -33,6 +33,7 @@ export default function WalletArea() {
           {visibility && (
             <Icon
               icon="bi:eye-slash-fill"
+              width={30}
               onClick={() => setVisibility(false)}
             />
           )}

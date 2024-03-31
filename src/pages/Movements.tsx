@@ -29,8 +29,8 @@ const Movements = () => {
   const selectList = (option: string) => {
     const details = {
       // TODOS: [...incomeList, ...expenseList],
-      SIMPLIFICADO: false,
-      DETALHADO: true,
+      SIMPLIFICADAS: false,
+      DETALHADAS: true,
     }[option];
     setIsDetailed(details);
   };
@@ -40,7 +40,7 @@ const Movements = () => {
       <div className="text-center p-4 lg:flex-1 text-2xl">MOVIMENTAÇÕES</div>
       <main className="w-full flex items-center justify-between mb-1 bg-slate-900">
         <G_Select
-          optionList={["SIMPLIFICADO", "DETALHADO"]}
+          optionList={["SIMPLIFICADAS", "DETALHADAS"]}
           onSelect={selectList}
           className="w-44 h-14"
         />
