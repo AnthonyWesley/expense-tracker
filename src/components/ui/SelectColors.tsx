@@ -75,12 +75,14 @@ export default function SelectColors({
 
         {isOpen && (
           <div
-            className={`h-[460px] w-[380px] grid grid-cols-6 p-1 gap-[2px] rounded-md text-xs absolute top-full mt-1 bg-gray-900 text-gray-800 shadow-xl`}
+            className={`h-[365px] min-w-[365px] grid grid-cols-5 p-1 gap-[2px] 
+            rounded-sm text-xs absolute overflow-y-scroll mt-1 bg-gray-900
+            text-gray-800 shadow-xl border-2 border-blue-600`}
           >
             {removeColorUsed?.map((color, index) => (
               <div
                 key={index}
-                className={`cursor-pointer
+                className={`cursor-pointer w-[65px] h-[65px] flex justify-center items-center
            `}
                 style={{
                   backgroundColor: color,
