@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface GSelectProps {
   onSelect: (option: string) => void;
@@ -14,7 +14,7 @@ export default function G_Select({
   onSelect,
   optionList,
   subtitle,
-  type,
+
   className,
 }: GSelectProps) {
   const [isOpen, setIsOpen] = useState(false);

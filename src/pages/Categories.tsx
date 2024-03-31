@@ -8,7 +8,6 @@ import EditedInput from "../components/categories/EditedInput";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useToastStore } from "../components/ui/Toast";
-import { tableColors } from "../data/tableColors";
 import SelectColors from "../components/ui/SelectColors";
 
 const status = ["RECEITAS", "DESPESAS"];
