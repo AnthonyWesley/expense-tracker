@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import G_InputArea from "../components/ui/G_InputArea";
 import G_Select from "../components/ui/G_Select";
 import G_Button from "../components/ui/G_Button";
