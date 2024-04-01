@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CategoryApiType } from "../../type/CategoryType";
 import G_Button from "../ui/G_Button";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -14,10 +14,11 @@ export default function EditedInput({
   category: CategoryApiType;
   onUpdate: (item: CategoryApiType, currentName?: string) => void;
 }) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [categoryId, setCategoryId] = useState("");
   const [text, setText] = useState(category.title);
   const { addAlert } = useToastStore();
-  const [categoryId, setCategoryId] = useState("");
   const { handleConfirm } = useConfirmStore();
 
   const { apiDeleteCategory } = useApiContext();
@@ -66,6 +67,10 @@ export default function EditedInput({
     }
   }, [categoryId]);
 
+  useEffect(() => {
+    if (!isDisabled) inputRef?.current?.focus();
+  }, [isDisabled]);
+
   return (
     <div key={category.id} className="flex gap-2 w-full my-1">
       <input
@@ -77,6 +82,7 @@ export default function EditedInput({
         value={text}
         onChange={handleChange}
         style={{ backgroundColor: category.color }}
+        ref={inputRef}
       />
       <div
         onClick={() =>

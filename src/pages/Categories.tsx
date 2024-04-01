@@ -111,7 +111,9 @@ const Categories: React.FC = () => {
           <G_Select
             onSelect={selectStatus}
             optionList={status}
-            className="w-full"
+            className={`w-full ${
+              newCategory.expense ? `border-red-600` : "border-green-600"
+            }`}
             value={"RECEITAS"}
           />
 
