@@ -93,7 +93,7 @@ const Categories: React.FC = () => {
   };
 
   return (
-    <section className="container w-full flex flex-col mx-auto my-16 gap-2 p-2">
+    <section className="container w-full flex flex-col mx-auto lg:my-14 my-16 gap-2 p-2">
       <div className=" text-2xl">SUAS CATEGORIAS</div>
 
       <div className="w-full flex flex-col lg:flex-row gap-2 mb-4 bg-gray-900">

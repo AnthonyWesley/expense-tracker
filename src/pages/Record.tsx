@@ -35,7 +35,7 @@ export default function Record() {
   }
 
   return (
-    <div className="container mx-auto rounded-lg my-16 p-4 bg-white">
+    <div className="container mx-auto rounded-lg lg:my-14 my-16 p-4 bg-white">
       <div className="space-y-1">
         <h4
           className="text-md font-bold leading-none rounded-sm p-4"

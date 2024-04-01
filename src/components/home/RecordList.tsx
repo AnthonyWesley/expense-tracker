@@ -78,7 +78,7 @@ export function RecordList({ className }: { className?: string }) {
 
   return (
     <section
-      className={`min-h-[200px] lg:h-[335px] w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
+      className={`max-h-[420px] lg:h-[335px] w-full mb-[70px] bg-appSecondaryColor rounded-md overflow-hidden ${
         className || "col-span-2"
       }`}
     >
@@ -94,7 +94,7 @@ export function RecordList({ className }: { className?: string }) {
 
       {filteredList.length > 0 && (
         <div
-          className={`${className} overflow-y-scroll h-[200px] lg:h-[280px] `}
+          className={`${className} overflow-y-scroll h-[280px] lg:h-[280px] `}
         >
           <table className="min-w-full bg-transparent border border-white/10">
             <thead>

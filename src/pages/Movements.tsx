@@ -36,7 +36,7 @@ const Movements = () => {
   };
 
   return (
-    <section className="w-full mx-auto rounded-lg my-16">
+    <section className="w-full mx-auto rounded-lg lg:my-14 my-16">
       <div className="text-center p-4 lg:flex-1 text-2xl">MOVIMENTAÇÕES</div>
       <main className="w-full flex items-center justify-between mb-1 bg-slate-900">
         <G_Select

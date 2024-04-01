@@ -34,7 +34,6 @@ const App = () => {
 
           <Route path="login" element={<LoginPage />} />
         </Routes>
-
         {dataUser?.name && <HeaderNavigation />}
 
         <Toast />
