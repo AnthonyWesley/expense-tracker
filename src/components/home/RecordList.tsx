@@ -78,7 +78,7 @@ export function RecordList({ className }: { className?: string }) {
 
   return (
     <section
-      className={`min-h-[200px] lg:mi-h-[280px] w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
+      className={`min-h-[200px] lg:h-[335px] w-full mb-16 bg-appSecondaryColor rounded-md overflow-hidden ${
         className || "col-span-2"
       }`}
     >
