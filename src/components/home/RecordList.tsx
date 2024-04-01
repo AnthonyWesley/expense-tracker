@@ -2,7 +2,7 @@ import { formattedText, formattedCurrency } from "../../helpers/others";
 import { useAppManager } from "../../context/AppManager";
 import { dateHelpers } from "../../helpers/DateHelpers";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RecordType } from "../../type/RecordType";
 import { useSearchParams } from "react-router-dom";
 import { useApiContext } from "../../context/ApiContext";
@@ -11,11 +11,16 @@ import G_Select from "../ui/G_Select";
 
 export function RecordList({ className }: { className?: string }) {
   const { categories } = useApiContext();
-  const { filteredList } = useAppManager();
+  const { filteredList, walletBalance } = useAppManager();
   const [newList, setNewList] = useState<RecordType[]>();
   const [_, setSearchParams] = useSearchParams();
   const optionList = ["TODOS", "RECEITAS", "DESPESAS"];
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setNewList(filteredList);
+    setSearchParams({ option: "TODOS" });
+  }, [walletBalance]);
 
   const selectList = (option: string) => {
     const actions: { [key: string]: () => void } = {
@@ -88,7 +93,7 @@ export function RecordList({ className }: { className?: string }) {
           optionList={optionList}
           onSelect={selectList}
           className="w-40 h-14"
-          // value={option}
+          value={"TODOS"}
         />
       </header>
 
@@ -106,7 +111,7 @@ export function RecordList({ className }: { className?: string }) {
                 <th className="text-left py-2 px-4 w-[100px]">DATA</th>
               </tr>
             </thead>
-            <tbody>{(newList ?? filteredList)?.map(renderTableRow)}</tbody>
+            <tbody>{newList?.map(renderTableRow)}</tbody>
           </table>
         </div>
       )}

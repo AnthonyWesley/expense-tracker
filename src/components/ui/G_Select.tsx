@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface GSelectProps {
   onSelect: (option: string) => void;
@@ -13,7 +13,7 @@ export default function G_Select({
   onSelect,
   optionList,
   subtitle,
-  // value,
+  value,
   className,
 }: GSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +30,10 @@ export default function G_Select({
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    setSelectedOption(value as string);
+  }, [value]);
 
   return (
     <div

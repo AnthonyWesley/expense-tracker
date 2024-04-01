@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import G_InputArea from "../components/ui/G_InputArea";
 import G_Select from "../components/ui/G_Select";
 import G_Button from "../components/ui/G_Button";
@@ -52,7 +52,7 @@ const Categories: React.FC = () => {
       setNewCategory({
         title: "",
         color: "",
-        expense: false,
+        expense: newCategory.expense,
       });
     }
   };
@@ -87,8 +87,6 @@ const Categories: React.FC = () => {
   };
 
   const selectColor = (option: string) => {
-    // console.log(option);
-
     setNewCategory((event) => ({ ...event, color: option }));
   };
 
@@ -114,7 +112,7 @@ const Categories: React.FC = () => {
             onSelect={selectStatus}
             optionList={status}
             className="w-full"
-            value={newCategory.color}
+            value={"RECEITAS"}
           />
 
           <G_Button

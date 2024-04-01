@@ -116,6 +116,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
                 subtitle="CATEGORIA"
                 onSelect={selectList}
                 optionList={incomeKeys.map((item) => categories[item]?.title)}
+                value={category}
               />
             )}
             {!change && (
@@ -123,6 +124,7 @@ const G_Modal = ({ modalName, className, funcActions }: ModalProps) => {
                 subtitle="CATEGORIA"
                 onSelect={selectList}
                 optionList={expenseKeys.map((item) => categories[item]?.title)}
+                value={category}
               />
             )}
 
