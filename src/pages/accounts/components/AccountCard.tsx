@@ -14,7 +14,9 @@ type AccountCardProps = {
 
 export default function AccountCard({ acc }: AccountCardProps) {
   const { apiDeleteAccount, apiUpdateAccount } = useApiContext();
-  const [editingAccountId, setEditingAccountId] = useState<string | null>(null);
+  const [editingaccount_id, setEditingaccount_id] = useState<string | null>(
+    null
+  );
   const { showAlert } = useToastStore();
   const { handleConfirm } = useConfirmStore();
 
@@ -47,17 +49,17 @@ export default function AccountCard({ acc }: AccountCardProps) {
     isError(account.number, "Número", errors);
     isError(account.type, "Tipo de conta", errors);
 
-    if (editingAccountId === id) {
+    if (editingaccount_id === id) {
       if (errors.length > 0) {
         errors.forEach((error) => showAlert(error.message!, error.type));
         return;
       }
       await apiUpdateAccount(id, item);
-      setEditingAccountId(null);
+      setEditingaccount_id(null);
       showAlert(`Conta atualizada com sucesso`, "success");
     } else {
       showAlert(`\u2713 para confirmar`, "warning");
-      setEditingAccountId(id);
+      setEditingaccount_id(id);
     }
   };
 
@@ -104,10 +106,10 @@ export default function AccountCard({ acc }: AccountCardProps) {
           <input
             name="name"
             className={`text-2xl ml-2 bg-transparent overflow-hidden  ${
-              editingAccountId ? " border-b" : ""
+              editingaccount_id ? " border-b" : ""
             }`}
             value={account.name || ""}
-            disabled={!editingAccountId}
+            disabled={!editingaccount_id}
             maxLength={15}
             onChange={handleNameChange}
           />
@@ -117,10 +119,10 @@ export default function AccountCard({ acc }: AccountCardProps) {
           <input
             name="agencia"
             className={`text-xl bg-transparent w-full ${
-              editingAccountId ? " border-b" : ""
+              editingaccount_id ? " border-b" : ""
             }`}
             value={account.branch || ""}
-            disabled={!editingAccountId}
+            disabled={!editingaccount_id}
             maxLength={15}
             onChange={handleBranchChange}
           />
@@ -131,10 +133,10 @@ export default function AccountCard({ acc }: AccountCardProps) {
           <input
             name="agencia"
             className={`text-xl bg-transparent w-full ${
-              editingAccountId ? " border-b" : ""
+              editingaccount_id ? " border-b" : ""
             }`}
             value={account.number || ""}
-            disabled={!editingAccountId}
+            disabled={!editingaccount_id}
             maxLength={15}
             onChange={handleNumberChange}
           />
@@ -145,10 +147,10 @@ export default function AccountCard({ acc }: AccountCardProps) {
           <input
             name="agencia"
             className={`text-xl bg-transparent w-full ${
-              editingAccountId ? " border-b" : ""
+              editingaccount_id ? " border-b" : ""
             }`}
             value={account.type || ""}
-            disabled={!editingAccountId}
+            disabled={!editingaccount_id}
             maxLength={15}
             onChange={handleTypeChange}
           />
@@ -166,11 +168,11 @@ export default function AccountCard({ acc }: AccountCardProps) {
             })
           }
           className={`${
-            editingAccountId ? "bg-green-500" : "bg-orange-500"
+            editingaccount_id ? "bg-green-500" : "bg-orange-500"
           } flex justify-center w-20 items-center rounded-sm cursor-pointer p-4`}
-          title={editingAccountId ? "Confirmar" : "Editar"}
+          title={editingaccount_id ? "Confirmar" : "Editar"}
         >
-          {editingAccountId ? (
+          {editingaccount_id ? (
             <Icon icon="line-md:confirm" width={30} height={30} />
           ) : (
             <Icon icon="line-md:edit" width={30} height={30} />

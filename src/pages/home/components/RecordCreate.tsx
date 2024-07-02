@@ -47,7 +47,7 @@ export default function RecordCreate() {
       category: category,
       description: description,
       value: toNumber(value) as number,
-      accountId: accountList[accountCount]?.id || "",
+      account_id: accountList[accountCount]?.id || "",
     });
 
     showAlert("Registro criado com sucesso!", "success");

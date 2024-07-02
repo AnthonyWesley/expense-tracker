@@ -6,5 +6,5 @@ export type RecordType = {
   category: string;
   description: string;
   value: number;
-  accountId?: string;
+  account_id?: string;
 };
