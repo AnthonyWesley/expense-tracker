@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Toast } from "./components/Toast";
-import { useApiContext } from "./context/ApiContext";
 import Confirm from "./components/Confirm";
+import FooterNav from "./components/FooterNavi";
 import HeaderNav from "./components/HeaderNav";
 import Spin from "./components/Spin";
+import { Toast } from "./components/Toast";
+import { useApiContext } from "./context/ApiContext";
 import Accounts from "./pages/accounts";
 import Categories from "./pages/categories";
 import Home from "./pages/home";
 import Movements from "./pages/movements";
 import PrivateRoutes from "./pages/privateRoutes";
-import UserAuth from "./pages/userAuth";
 import Records from "./pages/records";
-import FooterNav from "./components/FooterNavi";
+import UserAuth from "./pages/userAuth";
 
 const App = () => {
   const { dataUser, loading } = useApiContext();
