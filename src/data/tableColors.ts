@@ -23,7 +23,7 @@ export const tableColors = [
   "#00FF7F",
   "#8FBC8F",
   "#10b981",
-  "#008000",
+  "#22d3ee",
   "#00FF00",
   "#ADFF2F",
   "#DAA520",

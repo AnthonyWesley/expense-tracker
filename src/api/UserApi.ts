@@ -27,7 +27,7 @@ class UserApi {
   async login(user: UserType) {
     try {
       const response = await axios.post(
-        "https://expense-tracker-api-ochre.vercel.app/login",
+        "http://expense-tracker-api-ochre.vercel.app/login",
         user,
         {
           headers: { "Content-Type": "application/json" },

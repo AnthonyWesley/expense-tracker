@@ -8,6 +8,8 @@ import UserApi from "../api/UserApi";
 import CategoryApi from "../api/CategoryApi";
 import { CategoriesType, CategoryApiType } from "../type/CategoryType";
 import { ApiContextType } from "../type/ApiContextType";
+import AccountApi from "../api/AccountApi";
+import { AccountType } from "../type/AccountType";
 
 export type TokenType = { accessToken: string; refreshToken: string };
 
@@ -18,13 +20,16 @@ export default function ApiProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [accountCount, setAccountCount] = useState(0);
   const [dataUser, setDataUser] = useState<UserType | undefined>();
   const { setAuthTokens, axiosInstance, loading, setLoading } = useAxios();
   const [list, setList] = useState<RecordType[]>([]);
+  const [accountList, setAccountList] = useState<AccountType[]>([]);
   const [categories, setCategories] = useState<CategoriesType>({});
   const userApi = new UserApi();
   const recordApi = new RecordApi(axiosInstance);
   const categoryApi = new CategoryApi(axiosInstance);
+  const accountApi = new AccountApi(axiosInstance);
 
   async function registerUser(user: UserType) {
     setLoading(true);
@@ -45,10 +50,69 @@ export default function ApiProvider({
     }
   }
 
+  async function apiCreateAccount(item: AccountType) {
+    const response = await accountApi.create(item);
+    if (response) {
+      apiReadAccount();
+      return response;
+    }
+  }
+
+  const changeAccount = async () => {
+    if (accountList.length > 0) {
+      const record = await accountList[accountCount]?.records?.map(
+        (item: RecordType) => ({
+          ...item,
+          date: new Date(item.date),
+        })
+      );
+      if (record) {
+        setList(record);
+      }
+    }
+  };
+  useEffect(() => {
+    changeAccount();
+  }, [accountCount, accountList]);
+
+  async function apiReadAccount() {
+    const response = await accountApi.read();
+    // const record = await response[accountCount].records.map(
+    //   (item: RecordType) => ({
+    //     ...item,
+    //     date: new Date(item.date),
+    //   })
+    // );
+
+    if (response) {
+      setAccountList(response);
+      // setList(record);
+      return response;
+    }
+  }
+
+  async function apiUpdateAccount(id: string, updatedItem: AccountType) {
+    const response = await accountApi.update(id, updatedItem);
+    console.log(response);
+
+    if (response) {
+      apiReadAccount();
+      return response;
+    }
+  }
+
+  async function apiDeleteAccount(id: string) {
+    const response = await accountApi.delete(id);
+    if (response) {
+      apiReadAccount();
+      return response;
+    }
+  }
   async function apiCreateRecord(item: RecordType) {
     const response = await recordApi.create(item);
     if (response) {
-      apiReadRecord();
+      apiReadAccount();
+
       return response;
     }
   }
@@ -64,7 +128,8 @@ export default function ApiProvider({
   async function apiUpdateRecord(id: string, updatedItem: RecordType) {
     const response = await recordApi.update(id, updatedItem);
     if (response) {
-      apiReadRecord();
+      apiReadAccount();
+
       return response;
     }
   }
@@ -72,7 +137,8 @@ export default function ApiProvider({
   async function apiDeleteRecord(id: string) {
     const response = await recordApi.delete(id);
     if (response) {
-      apiReadRecord();
+      apiReadAccount();
+
       return response;
     }
   }
@@ -80,7 +146,8 @@ export default function ApiProvider({
   async function apiUpdateMany(currentName: string, updateName: string) {
     const response = await recordApi.updateMany(currentName, updateName);
     if (response) {
-      apiReadRecord();
+      apiReadAccount();
+
       return response;
     }
   }
@@ -122,7 +189,10 @@ export default function ApiProvider({
 
   useEffect(() => {
     if (dataUser?.name) {
-      apiReadRecord();
+      apiReadAccount();
+
+      apiReadAccount();
+
       apiReadCategory();
     }
   }, [dataUser?.name]);
@@ -148,6 +218,12 @@ export default function ApiProvider({
         loginUser,
         registerUser,
 
+        accountList,
+        apiCreateAccount,
+        apiReadAccount,
+        apiUpdateAccount,
+        apiDeleteAccount,
+
         apiCreateRecord,
         apiReadRecord,
         apiUpdateRecord,
@@ -160,6 +236,8 @@ export default function ApiProvider({
         apiUpdateCategory,
 
         apiUpdateMany,
+        accountCount,
+        setAccountCount,
       }}
     >
       {children}

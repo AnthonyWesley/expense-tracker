@@ -63,27 +63,29 @@ export default function AppProvider({
   };
 
   const calculateAllIncome = () => {
-    const newList: RecordType[] = [...list];
+    if (list) {
+      const newList: RecordType[] = [...list];
 
-    const expenseItems = newList.filter(
-      (item) => categories[item?.category]?.expense
-    );
+      const expenseItems = newList.filter(
+        (item) => categories[item?.category]?.expense
+      );
 
-    const totalExpense = expenseItems.reduce(
-      (total, item) => total + item?.value,
-      0
-    );
+      const totalExpense = expenseItems.reduce(
+        (total, item) => total + item?.value,
+        0
+      );
 
-    const incomeItems = newList.filter(
-      (item) => !categories[item?.category]?.expense
-    );
+      const incomeItems = newList.filter(
+        (item) => !categories[item?.category]?.expense
+      );
 
-    const totalIncome = incomeItems.reduce(
-      (total, item) => total + item?.value,
-      0
-    );
+      const totalIncome = incomeItems.reduce(
+        (total, item) => total + item?.value,
+        0
+      );
 
-    setWalletBalance(totalIncome - totalExpense);
+      setWalletBalance(totalIncome - totalExpense);
+    }
   };
 
   const calculateTotalsByCategory = (list: RecordType[]) => {

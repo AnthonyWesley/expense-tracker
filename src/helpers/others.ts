@@ -1,17 +1,38 @@
-import { ToastType } from "../components/ui/Toast";
+import { ToastType } from "../components/Toast";
 import { CategoriesType } from "../type/CategoryType";
 
 import { RecordType } from "../type/RecordType";
 
-export const formattedCurrency = (currency: number): string => {
+export const toCurrency = (currency: number): string => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
   }).format(currency);
 };
 
+export const autoCurrency = (value: string | undefined) => {
+  if (value) {
+    return Intl.NumberFormat("pt-BR", {
+      // style: "currency",
+      // currency: "BRL",
+      minimumFractionDigits: 2,
+    }).format(parseFloat(value) / 100);
+  }
+  return "";
+};
+
+export const toNumber = (value: string | number) => {
+  if (isNaN(value as number)) {
+    return parseFloat((value as string).replace(/\./g, "").replace(/,/g, "."));
+  } else {
+    return value;
+  }
+};
+
 export const findItemByParams = (list: RecordType[], paramsId: string) => {
-  return list.find((item) => item.id == paramsId);
+  if (list && paramsId) {
+    return list.find((item) => item.id == paramsId);
+  }
 };
 
 export const formattedText = (text: string) =>
@@ -38,6 +59,7 @@ interface Record {
   value: string;
   description: string;
 }
+
 export const validateFields = ({
   date,
   category,
@@ -45,23 +67,36 @@ export const validateFields = ({
   description,
 }: Record) => {
   const newErrors: ToastType[] = [];
-  if (!date)
-    newErrors.push({
-      message: `DATA INVÁLIDA"`,
-    });
 
-  if (!category)
+  if (!date || date.toString() === "Invalid Date") {
     newErrors.push({
-      message: `CATEGORIA INVÁLIDA"`,
+      message: "DATA INVÁLIDA",
+      type: "error",
     });
+  }
 
-  if (!Number(value))
+  if (!category) {
     newErrors.push({
-      message: `VALOR INVÁLIDO"`,
+      message: "CATEGORIA INVÁLIDA",
+      type: "error",
     });
-  if (description.length < 4)
+  }
+
+  if (value.length <= 0 || value === "0,00") {
     newErrors.push({
-      message: `DESCRIÇÃO INVÁLIDO"`,
+      message: "VALOR INVÁLIDO",
+      type: "error",
     });
+  }
+
+  if (description.length < 4) {
+    newErrors.push({
+      message: "DESCRIÇÃO INVÁLIDO",
+      type: "error",
+    });
+  }
+
+  // Add each error as an alert
+
   return newErrors;
 };

@@ -1,18 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toast } from "./components/Toast";
 import { useApiContext } from "./context/ApiContext";
-import HeaderNavigation from "./components/HeaderNavigation";
-
-import LoginPage from "./pages/LoginPage";
-import PrivateRoutes from "./pages/PrivateRoute";
-import Record from "./pages/Record";
-import Records from "./pages/Records";
-import Home from "./pages/Home";
-import Spin from "./components/home/Spin";
-import Categories from "./pages/Categories";
-import FooterNavigation from "./components/FooterNavigation";
-import { Toast } from "./components/ui/Toast";
-import Confirm from "./components/ui/Confirm";
-import Movements from "./pages/Movements";
+import Confirm from "./components/Confirm";
+import HeaderNav from "./components/HeaderNav";
+import Spin from "./components/Spin";
+import Accounts from "./pages/accounts";
+import Categories from "./pages/categories";
+import Home from "./pages/home";
+import Movements from "./pages/movements";
+import PrivateRoutes from "./pages/privateRoutes";
+import UserAuth from "./pages/userAuth";
+import Records from "./pages/records";
+import FooterNav from "./components/FooterNavi";
 
 const App = () => {
   const { dataUser, loading } = useApiContext();
@@ -22,19 +21,19 @@ const App = () => {
       {loading && <Spin />}
 
       <BrowserRouter>
-        {dataUser?.name && <FooterNavigation />}
+        {dataUser?.name && <FooterNav />}
         <Routes>
           <Route path="/" element={<PrivateRoutes />}>
             <Route index element={<Home />} />
-            <Route path="records" element={<Records />} />
-            <Route path="record/:id" element={<Record />} />
+            <Route path="record/:id" element={<Records />} />
+            <Route path="accounts" element={<Accounts />} />
             <Route path="movements" element={<Movements />} />
             <Route path="categories" element={<Categories />} />
           </Route>
 
-          <Route path="login" element={<LoginPage />} />
+          <Route path="login" element={<UserAuth />} />
         </Routes>
-        {dataUser?.name && <HeaderNavigation />}
+        {dataUser?.name && <HeaderNav />}
 
         <Toast />
         <Confirm />

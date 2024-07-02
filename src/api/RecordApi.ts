@@ -10,7 +10,7 @@ class RecordApi {
 
   async create(item: RecordType) {
     try {
-      const response = await this.axiosInstance.post("/records", item);
+      const response = await this.axiosInstance.post("/record", item);
       return response.data;
     } catch (error: any) {
       console.error("Erro ao adicionar item:", error.messageS);
@@ -20,7 +20,8 @@ class RecordApi {
 
   async read() {
     try {
-      const response = await this.axiosInstance.get("/records");
+      const response = await this.axiosInstance.get("/record");
+
       return response.data.records.map((item: RecordType) => ({
         ...item,
         date: new Date(item.date),

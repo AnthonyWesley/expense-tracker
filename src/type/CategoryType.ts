@@ -2,7 +2,7 @@ import { RecordType } from "./RecordType";
 
 export type CategoryApiType = {
   id?: string;
-  title: string;
+  name: string;
   color: string;
   expense: boolean;
   createdAt?: Date;
@@ -12,7 +12,7 @@ export type CategoryApiType = {
 export type CategoriesType = {
   [tag: string]: {
     id?: string;
-    title: string;
+    name: string;
     color: string;
     expense: boolean;
     createdAt?: Date;

@@ -26,14 +26,6 @@ class DateHelpers {
     return newList;
   };
 
-  formatDate = (date: Date): string => {
-    let year = date?.getFullYear();
-    let month = date?.getMonth() + 1;
-    let day = date?.getDate();
-
-    return `${this.addZeroToDate(day)}/${this.addZeroToDate(month)}/${year}`;
-  };
-
   addZeroToDate = (number: number): string =>
     number < 10 ? `0${number}` : `${number}`;
 
@@ -65,6 +57,21 @@ class DateHelpers {
     );
 
     return adjustedDate;
+  };
+
+  formatDate = (date: Date, yearFirst?: boolean): string => {
+    let year = date?.getFullYear();
+    let month = date?.getMonth();
+    let day = date?.getDate();
+    if (yearFirst) {
+      return `${year}-${this.addZeroToDate(month + 1)}-${this.addZeroToDate(
+        day
+      )}`;
+    } else {
+      return `${this.addZeroToDate(day)}/${this.addZeroToDate(
+        month + 1
+      )}/${year}`;
+    }
   };
 
   initialDate = () => {

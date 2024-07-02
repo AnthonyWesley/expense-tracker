@@ -10,7 +10,7 @@ class CategoryApi {
 
   async create(item: CategoryApiType) {
     try {
-      const response = await this.axiosInstance.post("/categories", item);
+      const response = await this.axiosInstance.post("/category", item);
       return response.data;
     } catch (error: any) {
       console.error("Erro ao adicionar item:", error.message);
@@ -20,19 +20,18 @@ class CategoryApi {
 
   async read() {
     try {
-      const response = await this.axiosInstance.get("/categories");
+      const response = await this.axiosInstance.get("/category");
 
-      const categoriesObj: CategoriesType =
-        await response.data.categories.reduce(
-          (acc: CategoriesType, item: CategoryApiType) => {
-            acc[item.title] = {
-              ...item,
-              // title: item.title.toUpperCase(),
-            };
-            return acc;
-          },
-          {}
-        );
+      const categoriesObj: CategoriesType = await response.data.data.reduce(
+        (acc: CategoriesType, item: CategoryApiType) => {
+          acc[item.name] = {
+            ...item,
+            // title: item.title.toUpperCase(),
+          };
+          return acc;
+        },
+        {}
+      );
 
       return categoriesObj;
     } catch (error: any) {
