@@ -10,7 +10,7 @@ export default function useAxios() {
   });
 
   const axiosInstance = axios.create({
-    baseURL: "http://expense-tracker-api-ochre.vercel.app/",
+    baseURL: "https://expense-tracker-api-ochre.vercel.app/",
     headers: {
       "Content-Type": "application/json",
       Authorization: authTokens.accessToken,
@@ -21,7 +21,7 @@ export default function useAxios() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://expense-tracker-api-ochre.vercel.app/refresh",
+        "https://expense-tracker-api-ochre.vercel.app/refresh",
         {
           refreshToken: authTokens.refreshToken,
         },
