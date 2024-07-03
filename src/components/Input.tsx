@@ -54,7 +54,6 @@ export default function Input({
             name={name}
             className="p-2 w-full rounded-sm outline-none bg-transparent no-spin-arrows custom-placeholder"
             value={value}
-            maxLength={15}
             {...rest}
           />
         </div>
