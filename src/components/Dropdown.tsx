@@ -70,7 +70,7 @@ export default function Dropdown({
 
         {isOpen && (
           <div
-            className={`absolute w-full max-h-[150px] shadow-lg top-full left-0 h-max p-1 bg-zinc-900 border border-zinc-200 rounded-sm flex items-start flex-col gap-2`}
+            className={`absolute w-full max-h-[150px] overflow-scroll shadow-lg top-full left-0 h-max p-1 bg-zinc-900 border border-zinc-200 rounded-sm flex items-start flex-col gap-2`}
           >
             {dropdownList?.map((option, index) => (
               <div
